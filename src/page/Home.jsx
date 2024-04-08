@@ -1,4 +1,5 @@
 import React from 'react'
+import Header from '../component/Header'
 import { useContext } from 'react'
 import ApiContext from '../ApiServer/ApiContext'
 
@@ -14,6 +15,9 @@ export default function Home() {
   }
   
   return (
-    <div onClick={logout}>Home</div>
+    <>
+    <div>hihihih</div>
+    {/* <div onClick={logout}>Home</div> */}
+    </>
   )
 }

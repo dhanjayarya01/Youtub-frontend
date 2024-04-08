@@ -1,49 +1,44 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './component/Home';
+import Sidebar from './component/Sidebar';
+import Home from "./page/Home"
 import Signup from './component/Signup';
-import Login from './component/Login';
-import AuthLayout from './ApiServer/Route/AuthLayout';
-import PageLayout from './ApiServer/Route/PageLayout';
+import Likedvideo from './page/Likedvideo';
+import Subscription from './page/Subscription';
+import Logout from './page/Logout'
+import Yourchannel from './page/Yourchannel';
+import History from './page/History';
 
-import ApiContext from './ApiServer/ApiContext';
-import { useContext } from 'react';
 function App() {
 
-  const {apiContext,isLoggedIn,setIsLoggedIn}=useContext(ApiContext)
-    
-  const getUser=async()=>{
-    const data= await apiContext.getCurrentUser()
-    if(data){
-      console.log(data)
-      setIsLoggedIn(true)
-    }
-  }
 
-  useEffect(()=>{
-    console.log("hs",isLoggedIn)
-    getUser()
 
-  },[])
+ 
   return (
     <Router>
+       <Sidebar>
       <Routes>
-
-        {!isLoggedIn ? <Route path="/" element={<AuthLayout/>}>
+        {/* {!isLoggedIn ? <Route path="/" element={<AuthLayout/>}>
         <Route path="" element={<Signup />}/>
         <Route path="/login" element={<Login/>}/>
-        </Route> 
+        </Route>  */}
         
         
-        :<Route path="/" element={<PageLayout />}> 
-          <Route path="" element={<Home/>}/>
-        </Route>}
+          <Route path="/" element={<Home/>}/>
+          <Route path="/likedvideo" element={<Likedvideo/>}/>
+          <Route path="/history" element={<History/>}/>
+          <Route path="/yourchannel" element={<Yourchannel/>}/>
+          <Route path="/logout" element={<Logout/>}/>
+
+          <Route path="/Signup" element={<Signup/>}/>
+          
       
   
 
 
   
       </Routes>
+      </Sidebar>
     </Router>
   );
 }
