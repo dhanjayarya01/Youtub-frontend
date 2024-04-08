@@ -6,21 +6,13 @@ import Signup from './component/Signup.jsx'
 import Login from './component/Login.jsx'
 import ApiProvider from './ApiServer/ApiProvider.jsx'
 import Home from './component/Home.jsx'
-const router=createBrowserRouter(
+import App from './App.jsx'
 
-  createRoutesFromElements(
-    <>
-
-    <Route path='/' element={<Signup/>} />
-    <Route path='Login' element={<Login/>} />
-    <Route path='Header' element={<Home/>} />
-    </>
-  )
-)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ApiProvider>
-    <RouterProvider router={router} />
+    {/* <RouterProvider router={router} /> */}
+    <App/>
     </ApiProvider>
   </React.StrictMode>
 )

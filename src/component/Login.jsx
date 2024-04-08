@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 import Input from './Input'
 import signupq from "/image/signupq.png"
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import ApiContext from '../ApiServer/ApiContext'
 
@@ -9,9 +9,10 @@ import ApiContext from '../ApiServer/ApiContext'
  function Login() {
   const[email,setEmail]=useState("")
   const[password,setPassword]=useState("")
-
   const {apiContext,setIsLoggedIn}=useContext(ApiContext)
 
+
+  const navigate=useNavigate()
     const handleSubmit = async () => {
       console.log("email",email)
         const userdata={
@@ -20,11 +21,12 @@ import ApiContext from '../ApiServer/ApiContext'
         }
     
       try {
-        const response = await apiContext.loginUser(userdata); 
+        const response = await apiContext.loginUser(userdata)
         console.log('User Login successfully:', response);
+        navigate("/")
         setIsLoggedIn(true)
         const data= await apiContext.getCurrentUser()
-        console.log("userdata is",data)
+      
       } catch (error) {
         console.error('login error:', error);
       }

@@ -26,7 +26,7 @@ class Apiservice{
 
   logoutUser = async () => {
   try {
-    const response = await axiosInstance.post('/logout');
+    const response = await axios.post('/api/v1/users/logout');
     return response.data;
   } catch (error) {
     throw error.response.data;
