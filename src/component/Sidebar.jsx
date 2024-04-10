@@ -2,8 +2,13 @@ import {AnimatePresence ,motion} from "framer-motion"
 import {FaHome} from"react-icons/fa"
 import { SlLike } from "react-icons/sl";
 import { IoReorderThreeOutline } from "react-icons/io5";
+import { RiHistoryLine } from "react-icons/ri";
+import { VscAccount } from "react-icons/vsc";
+import { ImProfile } from "react-icons/im";
+
 import { NavLink ,useLocation } from "react-router-dom";
 import History from "../page/History";
+
 import { useState } from "react";
 import { all } from "axios";
 import Header from "./Header";
@@ -23,17 +28,17 @@ const route=[
     {
         path:"/history",
         name:"History",
-        icon:<FaHome/>
+        icon:<RiHistoryLine/>
     },
     {
         path:"/yourchannel",
         name:"yourchannel",
-        icon:<FaHome/>
+        icon:<ImProfile/>
     },
     {
         path:"/myprofile",
         name:"Myprofile",
-        icon:<FaHome/>
+        icon:<VscAccount/>
     },
    
     
@@ -62,15 +67,17 @@ const Sidebar=({children})=>{
     return(
              
              <div className=" flex  min-h-screen ">
-             <div className=" flex h-{100%} w-[72.9px] "></div>
-            <motion.div className=" overflow-clip   absolute h-full  w-[3rem] bg-[#ffffff]" animate={{width:isopen ?"220px":"72.8px" , transition:{ duration:0.5,type:"spring", damping:11}}}>
+             <div className=" flex  h-{100%}  w-[4.55625rem]  "></div>
+            <motion.div className=" overflow-clip   absolute h-full  w-[3rem] bg-[#]" animate={{width:isopen ?"220px":"72.8px" , transition:{ duration:0.5,type:"spring", damping:11}}}>
  
               <div className={`title ${isopen && 'flex  items-center'}`}>
-                <div className={`mt-[12% ]  h-[4.9rem] flex  items-center text-[2.3rem] ${isopen ? 'justify-start ml-3 ' :'justify-center'} `} onClick={toggle}><IoReorderThreeOutline/></div>
+                <div className={`  h-[4.2rem] flex  items-center text-[2.3rem] ${isopen ? 'justify-start ml-3 ' :'justify-center'} `} onClick={toggle}><IoReorderThreeOutline/></div>
                 {
                  isopen &&  <div  className='flex ml-[13%] items-center  '>
+                    <AnimatePresence>
                  <div  className=' flex  h-[2rem] w-[100%]  transition-opacity duration-100 ease-in '><img className='h-[100%] w-[100%] '  src='/image/yt1.png'></img></div>
-               <div className=' font-bold'>YOUTUB</div>
+                 </AnimatePresence>
+               <div  className='font-extrabold ml-1 text-[112%]  text-black'>YouTube</div>
                </div>
                 }
               </div>

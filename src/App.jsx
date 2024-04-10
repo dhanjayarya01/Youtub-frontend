@@ -4,11 +4,11 @@ import Sidebar from './component/Sidebar';
 import Home from "./page/Home"
 import Signup from './component/Signup';
 import Likedvideo from './page/Likedvideo';
-import Logout from './page/Logout'
+import Logout from './component/Logout'
 import Yourchannel from './page/Yourchannel';
 import History from './page/History';
 import Myprofile from './page/Myprofile';
-
+import Login from './component/Login';
 function App() {
 
   return (
@@ -29,6 +29,7 @@ function App() {
           <Route path="/myprofile" element={<Myprofile/>}/>
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/Signup" element={<Signup/>}/>
+          <Route path="/login" element={<Login/>}/>
           
       
   
