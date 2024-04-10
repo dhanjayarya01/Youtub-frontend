@@ -68,7 +68,7 @@ const Sidebar=({children})=>{
              
              <div className=" flex  min-h-screen ">
              <div className=" flex  h-{100%}  w-[4.55625rem]  "></div>
-            <motion.div className=" overflow-clip   absolute h-full  w-[3rem] bg-[#]" animate={{width:isopen ?"220px":"72.8px" , transition:{ duration:0.5,type:"spring", damping:11}}}>
+            <motion.div className=" overflow-clip   absolute h-full  w-[3rem] bg-[#ffffff]" animate={{width:isopen ?"220px":"72.8px" , transition:{ duration:0.5,type:"spring", damping:11}}}>
  
               <div className={`title ${isopen && 'flex  items-center'}`}>
                 <div className={`  h-[4.2rem] flex  items-center text-[2.3rem] ${isopen ? 'justify-start ml-3 ' :'justify-center'} `} onClick={toggle}><IoReorderThreeOutline/></div>
