@@ -1,7 +1,13 @@
-import {motion} from "framer-motion"
+import {AnimatePresence ,motion} from "framer-motion"
 import {FaHome} from"react-icons/fa"
-import { NavLink } from "react-router-dom";
+import { SlLike } from "react-icons/sl";
+import { IoReorderThreeOutline } from "react-icons/io5";
+import { NavLink ,useLocation } from "react-router-dom";
 import History from "../page/History";
+import { useState } from "react";
+import { all } from "axios";
+import Header from "./Header";
+
 
 const route=[
     {
@@ -12,7 +18,7 @@ const route=[
     {
         path:"/likedvideo",
         name:"likedvideo",
-        icon:<FaHome/>
+        icon:<SlLike/>
     },
     {
         path:"/history",
@@ -25,32 +31,93 @@ const route=[
         icon:<FaHome/>
     },
     {
-        path:"/logout",
-        name:"Logout",
+        path:"/myprofile",
+        name:"Myprofile",
         icon:<FaHome/>
     },
+   
+    
     
    
    
 ]
-const Sidebar=({children})=>{
-    return(
-             <div className="flex">
-            <motion.div className="   h-[34rem] w-[3rem] bg-fuchsia-600" animate={{width:"200px"}}>
 
-                <section>
-                    {
+const Sidebar=({children})=>{
+    const [isopen,setIsopen]=useState(false)
+ 
+    const location = useLocation();
+
+    const textanimation ={
+        hidden:{
+            width:0
+        },
+        show:{
+            width:"100%",
+            transition:{
+                duration:0.2
+            }
+        }
+    }
+    const toggle=()=>setIsopen(!isopen)
+    return(
+             
+             <div className=" flex  min-h-screen ">
+             <div className=" flex h-{100%} w-[72.9px] "></div>
+            <motion.div className=" overflow-clip   absolute h-full  w-[3rem] bg-[#ffffff]" animate={{width:isopen ?"220px":"72.8px" , transition:{ duration:0.5,type:"spring", damping:11}}}>
+ 
+              <div className={`title ${isopen && 'flex  items-center'}`}>
+                <div className={`mt-[12% ]  h-[4.9rem] flex  items-center text-[2.3rem] ${isopen ? 'justify-start ml-3 ' :'justify-center'} `} onClick={toggle}><IoReorderThreeOutline/></div>
+                {
+                 isopen &&  <div  className='flex ml-[13%] items-center  '>
+                 <div  className=' flex  h-[2rem] w-[100%]  transition-opacity duration-100 ease-in '><img className='h-[100%] w-[100%] '  src='/image/yt1.png'></img></div>
+               <div className=' font-bold'>YOUTUB</div>
+               </div>
+                }
+              </div>
+              <section className={`pt-8 ${isopen ? 'pr-1 pl-1' : 'pl-1 pr-1'}`}>
+                {
                     route.map((route)=>(
-                        <NavLink to={route.path} key={route.name}>
-                            <div>{route.icon}</div>
-                            <div>{route.name}</div>
+                        <NavLink  to={route.path} key={route.name} >
+                           <div className={` mt-1 pl-6 flex w-{100%} rounded-md h-[2.8rem] justify-start items-center hover:bg-[#F2F2F2] transition-all duration-2000 ease-cubic-bezier(0.06, -0.28, 0.735, 0.045) ${location.pathname === route.path &&isopen ? 'bg-[#F2F2F2]' : ''}`}>
+                            <div className={`text-2xl pl--2 ${location.pathname === route.path && !isopen ? ' text-red-800' : ''}`}>{route.icon}</div>    
+                         <AnimatePresence>
+                           <motion.div initial="hidden" animate="show" exit="hidden" variants={textanimation} className=" text-[1rem] w-[44rem]  ml-5">{route.name}</motion.div>
+                         </AnimatePresence>
+                            </div>
                         </NavLink>
                     ))
                     }
+                    
+                   <div className="mt-[67%] ">
+
+                     <NavLink to="/logout" key="logout" ><div></div>
+                        <div >
+                            <div className={`mt-1.9 pl-6 flex  w-{100%} rounded-md h-[2.8rem] justify-start items-center   hover:bg-[#F2F2F2]  transition-all duration-2000 ease-cubic-bezier(0.06, -0.28, 0.735, 0.045) `}>
+                            <div className="text-2xl pl--2  "><FaHome/></div>    
+                         <AnimatePresence>
+                           <motion.div initial="hidden" animate="show" exit="hidden" variants={textanimation} className="text-[1rem] w-[44rem]  ml-5">Logout</motion.div>
+                         </AnimatePresence>
+                            </div></div>
+                        </NavLink>
+                     <NavLink className=""  to="/setting" key="setting">
+                            <div className={`  mt-1.9 pl-6 flex  w-{100%} rounded-md h-[2.8rem] justify-start items-center  hover:bg-[#F2F2F2]  transition-all duration-2000 ease-cubic-bezier(0.06, -0.28, 0.735, 0.045) `}>
+                            <div className="  text-2xl pl--2  "><FaHome/></div>    
+                         <AnimatePresence>
+                           <motion.div initial="hidden" animate="show" exit="hidden" variants={textanimation} className="  text-[1rem] w-[44rem]  ml-5">Settings</motion.div>
+                         </AnimatePresence>
+                            </div>
+                        </NavLink>
+
+                        </div>
                 </section>
             </motion.div>
+            
+            <div className={`flex-auto ${isopen?'bg-[#ECECEC]':'bg-[ffffff]'}`}>  
+           <Header/>
              <main>{children}</main>
              </div>
+            </div>
+            
     )
 }
 

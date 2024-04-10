@@ -1,19 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { Profiler, useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Sidebar from './component/Sidebar';
 import Home from "./page/Home"
 import Signup from './component/Signup';
 import Likedvideo from './page/Likedvideo';
-import Subscription from './page/Subscription';
 import Logout from './page/Logout'
 import Yourchannel from './page/Yourchannel';
 import History from './page/History';
+import Myprofile from './page/Myprofile';
 
 function App() {
 
-
-
- 
   return (
     <Router>
        <Sidebar>
@@ -28,8 +25,9 @@ function App() {
           <Route path="/likedvideo" element={<Likedvideo/>}/>
           <Route path="/history" element={<History/>}/>
           <Route path="/yourchannel" element={<Yourchannel/>}/>
-          <Route path="/logout" element={<Logout/>}/>
 
+          <Route path="/myprofile" element={<Myprofile/>}/>
+          <Route path="/logout" element={<Logout/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           
       
