@@ -67,7 +67,7 @@ const Sidebar=({children})=>{
     return(
              
              <div className=" overflow-auto flex h-screen  min-h-screen ">
-             <div className=" flex  h-screen w-[72.9px] "></div>
+             <div className=" flex  h-screen w-[122.9px] "></div>
             <motion.div className=" z-50 overflow-clip   absolute h-screen  w-[3rem] bg-[#ffffff]" animate={{width:isopen ?"220px":"72.8px" , transition:{ duration:0.5,type:"spring", damping:11}}}>
  
               <div className={`title ${isopen && 'flex  items-center'}`}>
@@ -119,7 +119,7 @@ const Sidebar=({children})=>{
                 </section>
             </motion.div>
             
-            <div className={`flex-auto ${isopen ? 'bg-[#ECECEC]' : 'bg-[#ffffff]'}`}>
+            <div className={`flex-auto  ${isopen ? 'bg-[#ECECEC]' : 'bg-[#ffffff]'}`}>
 
            <Header/>
              <main>{children}</main>

@@ -32,7 +32,7 @@ const [page, setPage] = useState(1);
 
 return (
            
-            <div className="text-white mb-20 sm:m-0 max-h-screen w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1  ">
+            <div className= " text-white mb-20 sm:m-0 max-h-screen w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1  ">
                 {videos?.map((video) => (
                     <VideosCard
                         key={video._id}
