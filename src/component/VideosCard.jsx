@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function VideosCard({
     thumbnail,
-    duration,
+    duration,   
     title,
     views = 0,
     avatar,

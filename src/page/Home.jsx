@@ -1,39 +1,47 @@
-import React, { useEffect, useState,useCallback}from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useContext } from 'react';
 import ApiContext from '../ApiServer/ApiContext';
-import InfiniteScroll from '../component/InfiniteScroll';
 import VideosCard from '../component/VideosCard';
+import InfiniteScroll from '../component/InfiniteScroll';
 
 function Home() {
-  const { apiContext, setIsLoggedIn } = useContext(ApiContext);
-  const [videos, setVideos] = useState([]);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+    const { apiContext } = useContext(ApiContext);
+    const [videos, setVideos] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
 
-  const getVideos = async () => {
-    try {
-      const response = await apiContext.getAllVideos({ page: currentPage }); // Pass the current page to the backend
-      setVideos(response.data.docs);
-      setTotalPages(response.data.totalPages);
-    } catch (error) {
-      console.error('Error fetching videos:', error);
-    }
-  };
+    const fetchVideos = async (page) => {
+        try {
+            const response = await apiContext.getAllVideos({ page });
+            return response.data;
+        } catch (error) {
+            console.error('Error fetching videos:', error);
+            return { docs: [], totalPages: 1 };
+        }
+    };
 
+    const loadMoreVideos = useCallback(async () => {
+        if (currentPage < totalPages) {
+            const nextPage = currentPage + 1;
+            const newData = await fetchVideos(nextPage);
+            setCurrentPage(nextPage);
+            setVideos((prevData) => [...prevData, ...newData.docs]);
+        }
+    }, [currentPage, totalPages]);
 
-const [page, setPage] = useState(1);
+    useEffect(() => {
+        const loadInitialVideos = async () => {
+            const initialData = await fetchVideos(currentPage);
+            setVideos(initialData.docs);
+            setTotalPages(initialData.totalPages);
+        };
+        loadInitialVideos();
+    }, []);
 
-  useEffect(() => {
-    getVideos();
-  }, [currentPage]); 
-
-  console.log("hi",videos)
- 
-
-return (
-           
-            <div className= " text-white mb-20 sm:m-0 max-h-screen w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1  ">
-                {videos?.map((video) => (
+    return (
+        <div className="text-white mb-20 sm:m-0 max-h-screen w-[74rem] grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+            <InfiniteScroll fetchMore={loadMoreVideos} hasNextPage={currentPage < totalPages}>
+                {videos.map((video) => (
                     <VideosCard
                         key={video._id}
                         avatar={video.ownerDetails?.avatar}
@@ -46,8 +54,9 @@ return (
                         videoId={video._id}
                     />
                 ))}
-            </div>
-    
-);
+            </InfiniteScroll>
+        </div>
+    );
 }
+
 export default Home;
