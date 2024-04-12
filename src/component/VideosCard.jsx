@@ -22,8 +22,8 @@ function VideosCard({
     return (
         <>
             <div
-                className="w-[98%] sm:p-2 cursor-pointer mt-1 "
-                // onClick={() => navigate(`/watch/${videoId}`)}
+                className="w-[98%]  sm:p-2 cursor-pointer mt-1 "
+                onClick={() => navigate(`/v/${videoId}`)}
             >
                 <div className="relative sm:h-52  h-44    ">
                     <img

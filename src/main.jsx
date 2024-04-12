@@ -8,6 +8,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ApiProvider>
     {/* <RouterProvider router={router} /> */}
+    
     <App/>
     </ApiProvider>
   </React.StrictMode>

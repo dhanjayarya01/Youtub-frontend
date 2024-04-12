@@ -66,7 +66,7 @@ const Sidebar=({children})=>{
     const toggle=()=>setIsopen(!isopen)
     return(
              
-             <div className=" overflow-auto flex h-screen  min-h-screen ">
+             <div className="  flex h-screen  min-h-screen ">
              <div className=" flex  h-screen w-[72.9px] "></div>
             <motion.div className=" z-50 overflow-clip   absolute h-screen  w-[3rem] bg-[#ffffff]" animate={{width:isopen ?"220px":"72.8px" , transition:{ duration:0.5,type:"spring", damping:11}}}>
  
@@ -119,10 +119,10 @@ const Sidebar=({children})=>{
                 </section>
             </motion.div>
             
-            <div className={`flex-auto overflow-scroll ${isopen ? 'bg-[#ECECEC]' : 'bg-[#ffffff]'}`}>
+            <div className={`flex-auto overflow-hidden  ${isopen ? 'bg-[#ECECEC]' : 'bg-[#ffffff]'}`}>
 
            <Header/>
-             <main className=" flex justify-end w-{full} h-full">{children}</main>
+             <main className=" flex  w-{full} h-full">{children}</main>
              </div>
             </div>
             

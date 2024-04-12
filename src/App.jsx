@@ -9,10 +9,13 @@ import Yourchannel from './page/Yourchannel';
 import History from './page/History';
 import Myprofile from './page/Myprofile';
 import Login from './component/Login';
-function App() {
+import VideoPlay from './page/VideoPlay';
 
+function App() {
+ 
   return (
     <Router>
+      
        <Sidebar>
       <Routes>
         {/* {!isLoggedIn ? <Route path="/" element={<AuthLayout/>}>
@@ -30,6 +33,7 @@ function App() {
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/v/:videoId" element={<VideoPlay/>}/>
           
       
   

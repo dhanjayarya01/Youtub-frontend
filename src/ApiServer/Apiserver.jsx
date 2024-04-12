@@ -36,7 +36,7 @@ class ApiService {
 
   async refreshAccessToken(refreshTokenData) {
     try {
-      const response = await this.axiosInstance.post('/refresh-token', refreshTokenData);
+      const response = await this.axios.post('/refresh-token', refreshTokenData);
       return response.data;
     } catch (error) {
       throw error.response.data;
