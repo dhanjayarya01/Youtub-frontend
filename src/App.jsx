@@ -10,18 +10,29 @@ import History from './page/History';
 import Myprofile from './page/Myprofile';
 import Login from './component/Login';
 import VideoPlay from './page/VideoPlay';
+import { useContext } from 'react';
+import ApiContext from './ApiServer/ApiContext';
+
 
 function App() {
- 
+ const{apiContext,currentuserinfo,setCurrentuserinfo,isLoggedIn,setIsLoggedIn}=useContext(ApiContext)
+ const getCurrentUser =async()=>{
+   
+   const user= await apiContext.getCurrentUser();
+   console.log("user",user.data)
+   setCurrentuserinfo(user.data)
+   setIsLoggedIn(true)
+
+ }
+ useEffect(()=>{
+  getCurrentUser()
+ },[isLoggedIn])
   return (
     <Router>
       
        <Sidebar>
       <Routes>
-        {/* {!isLoggedIn ? <Route path="/" element={<AuthLayout/>}>
-        <Route path="" element={<Signup />}/>
-        <Route path="/login" element={<Login/>}/>
-        </Route>  */}
+      
         
         
           <Route path="/" element={<Home/>}/>
@@ -33,15 +44,12 @@ function App() {
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
-          <Route path="/v/:videoId" element={<VideoPlay/>}/>
+          <Route path="/v/:videoId" element={isLoggedIn ?<VideoPlay/> : <Signup/>}/>
           
-      
-  
-
-
   
       </Routes>
       </Sidebar>
+      
     </Router>
   );
 }

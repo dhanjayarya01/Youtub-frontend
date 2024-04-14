@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { useContext } from 'react'
 import ApiContext from '../ApiServer/ApiContext'
+import VideoDetail from '../component/VideoDetail'
+import Video from '../component/Video'
 
 function VideoPlay() {
   const[video,setVideo]=useState({})
@@ -11,7 +13,7 @@ function VideoPlay() {
  
   const getvideobyId=async()=>{
     const Video = await apiContext.getVideoById(videoId);
-    setVideo(Video);
+    setVideo(Video.data[0]);
   }
   useEffect(()=>{
     getvideobyId()
@@ -22,17 +24,13 @@ function VideoPlay() {
 
   return (
     
-    <div className=' bg-red-900 overflow-scroll no-scrollbar w-full'>
+    <div className=' h-screen w-full'>
       
-    <div className= 'flex w-[60%] bg-yellow-300 h-[70%]'>
-    <video controls autoPlay className='w-full h-full'>
-      
-    { video && video.data && video.data[0] && video.data[0].videoFile ?
-          <source src={video.data[0].videoFile} type="video/mp4" />
-          : null
-        }
-        </video>    </div>
-    <div className='w-[80%] h-full'></div>
+    <Video video={video} />
+
+     <VideoDetail videodetail={video} avatar={video?.owner?.avatar}/>
+    
+    
     </div>
     
     

@@ -18,7 +18,7 @@ function VideosCard({
         e.stopPropagation();
         // navigate(`/channel/${channelName}`);
     };
-
+  
     return (
         <>
             <div

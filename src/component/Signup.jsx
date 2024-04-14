@@ -61,16 +61,16 @@ function Signup() {
   
 
   return (
-   <div className='container flex-1 pl-[6%]  pr-[6%] pb-[2.5%] pt-[2.5%] bg-[#F5EAFF]'>
+   <div className=' flex h-screen  w-full bg-red-900'>
 
 
-   <div className='outerdiv h-[33.89rem] ,w-[100%] bg-[#FFFFFF] drop-shadow-lg flex justify-between box-border'>
+   <div className='outerdiv h-[100%] w-[100%] bg-yellow-200 drop-shadow-lg flex justify-between box-border'>
 
     <div className='inputouter h-[100%] w-[100%]  p-20 pr-0 pt-4'>
      
       <div className='logodiv h-[16%] w-[75%] '> 
         <div className='flex items-center   mb-[2%] '>
-          <div  className=' flex ml-[35%] h-8 w-[12%] '><img className='h-[100%] w-[100%]'  src='/image/yt1.png'></img></div>
+          <div  className=' flex ml-[35%] h-8  w-[10%] mr-2 '><img className='h-[100%] w-[100%]'  src='/image/yt1.png'></img></div>
         <div className=' font-bold'>YOUTUB</div>
         </div>
          
@@ -99,7 +99,7 @@ function Signup() {
          
          <div className='flex mt-[4%] ml-[23%]'>
             <p>Already have an account </p>
-            <Link to="Login" className='ml-[3%] text-[#C640FF]'>Login</Link>
+            <Link to="/Login" className='ml-[3%] text-[#C640FF]'>Login</Link>
          </div>
      </div>
     </div>

@@ -55,7 +55,7 @@ import ApiContext from '../ApiServer/ApiContext'
             
             <div className='flex mt-[4%] ml-[23%]'>
                <p>Don't have an account</p>
-               <Link to="/" className='ml-[3%] text-[#C640FF]'>Signup</Link>
+               <Link to="/Signup" className='ml-[3%] text-[#C640FF]'>Signup</Link>
             </div>
         </div>
        </div>

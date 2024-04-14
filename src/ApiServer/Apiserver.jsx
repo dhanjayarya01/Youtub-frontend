@@ -36,7 +36,7 @@ class ApiService {
 
   async refreshAccessToken(refreshTokenData) {
     try {
-      const response = await this.axios.post('/refresh-token', refreshTokenData);
+      const response = await this.axiosInstance.post('/refresh-token', refreshTokenData);
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -160,6 +160,80 @@ class ApiService {
   async togglePublishStatus(videoId) {
     try {
       const response = await this.axiosInstance.patch(`/videos/toggle/publish/${videoId}`);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async getVideoComments(videoId, page = 1, limit = 10) {
+    try {
+      const response = await this.axiosInstance.get(`/comment/c/${videoId}`)
+      return response.data;
+    } catch (error) {
+      console.log("err ",error);
+      throw error.response.data;
+    }
+  }
+
+    async addComment(videoId, content) {
+      try {
+        const response = await this.axiosInstance.post(`/comment/c/${videoId}`, { content });
+        return response.data;
+      } catch (error) {
+        throw error.response.data;
+      }
+    }
+  
+    async updateComment(commentId, content) {
+      try {
+        const response = await this.axiosInstance.patch(`/comment/c/${commentId}`, { content });
+        return response.data;
+      } catch (error) {
+        throw error.response.data;
+      }
+    }
+  
+    async deleteComment(commentId) {
+      try {
+        const response = await this.axiosInstance.delete(`/comment/c/${commentId}`);
+        return response.data;
+      } catch (error) {
+        throw error.response.data;
+      }
+    }
+  
+  
+  async toggleVideoLike(videoId) {
+    try {
+      const response = await this.axiosInstance.post(`/videos/${videoId}/like`);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async toggleCommentLike(commentId) {
+    try {
+      const response = await this.axiosInstance.post(`/comments/${commentId}/like`);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async toggleTweetLike(tweetId) {
+    try {
+      const response = await this.axiosInstance.post(`/tweets/${tweetId}/like`);
+      return response.data;
+    } catch (error) {
+      throw error.response.data;
+    }
+  }
+
+  async getLikedVideos() {
+    try {
+      const response = await this.axiosInstance.get(`/likes/videos`);
       return response.data;
     } catch (error) {
       throw error.response.data;

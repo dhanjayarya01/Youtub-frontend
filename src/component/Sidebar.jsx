@@ -119,10 +119,10 @@ const Sidebar=({children})=>{
                 </section>
             </motion.div>
             
-            <div className={`flex-auto overflow-hidden  ${isopen ? 'bg-[#ECECEC]' : 'bg-[#ffffff]'}`}>
+            <div className={`flex-auto overflow-y-scroll no-scrollbar ${isopen ? 'bg-[#ECECEC]' : 'bg-[#ffffff]'}`}>
 
            <Header/>
-             <main className=" flex  w-{full} h-full">{children}</main>
+             <main className=" flex  w-{full} max-h-screen">{children}</main>
              </div>
             </div>
             
