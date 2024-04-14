@@ -6,6 +6,7 @@
     import ApiContext from '../ApiServer/ApiContext';
     import InfiniteScroll from './InfiniteScroll'; // Import the InfiniteScroll component
     import { timeAgo } from '../helpers/timeAgo';
+    import SkeletonComment from '../skeleton/VideodetailSkeleton';
     
 
     function VideoDetail({ videodetail }) {
@@ -74,7 +75,7 @@
                     </div>
                     <div className='m-[2%] h-[90%] w-[25%]'>
                         <div className='font-bold text-xl h-[40%]'>{videodetail?.owner?.username}</div>
-                        <div className='mt-[2%]'>{`${videodetail?.owner?.subscribercount}  subscribers`}</div>
+                        <div className='mt-[2%]'>{`${videodetail?.owner?.subscribercount || 0}  subscribers`}</div>
                     </div>
                     <button className='active:bg-red-500 h-[80%] w-[17%] font-bold text-base  rounded-3xl bg-black text-white'>Subscribe</button>
                     <div className='likediv ml-[10%] flex m-[3%]  w-[24%] h-[80%] rounded-3xl bg-[#ECECEC]'>
@@ -121,8 +122,8 @@
 
                     <InfiniteScroll fetchMore={loadMoreComments} hasNextPage={currentPage < totalPages && !loading}>
                         {loading ?
-                            Array.from({ length: 6 }).map((_, index) => <div key={index} className="skeleton"></div>)
-                            :
+                        Array.from({ length: 6 }).map((_, index) => <SkeletonComment key={index} />)
+                        :
                              comments.map((comment) => (
                             <div key={comment._id} className="comment  w-full  flex  p-2 mt-2 rounded-md">
                                 <div className='avatar w-[3rem] h-[3rem] border-[0.01rem] border-black  rounded-full  mr-4'>
