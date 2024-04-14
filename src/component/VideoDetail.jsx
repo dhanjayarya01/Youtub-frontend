@@ -62,7 +62,7 @@
            setUsercomment('')
            setIscommentopen(false)
         }
-
+      console.log("comment",comments)
       
         return (
             <div className='w-full flex-grow h-[100%]'>
@@ -105,7 +105,7 @@
                      
                      <div className='sendcomment  flex mt-[3%] items-start    h-[17%] w-full'>
                         
-                        <div className="avatardiv h-[50%] mt-3 flex items-center rounded-[4rem]  w-[3rem] bg-slate-100">j
+                        <div className="avatardiv h-[50%] mt-3 flex items-center rounded-[4rem]  w-[3rem] bg-slate-100">
                             <img src={currentuserinfo?.avatar} alt=".." />
                          </div>
 
@@ -123,12 +123,32 @@
                         {loading ?
                             Array.from({ length: 6 }).map((_, index) => <div key={index} className="skeleton"></div>)
                             :
-                            comments.map((comment) => (
-                                <div key={comment._id} className="comment">
-                                    {/* Render your comment UI here */}
-                                    <div>{comment?.content}</div>
+                             comments.map((comment) => (
+                            <div key={comment._id} className="comment  w-full  flex  p-2 mt-2 rounded-md">
+                                <div className='avatar w-[3rem] h-[3rem] border-[0.01rem] border-black  rounded-full  mr-4'>
+                                    <img src={comment.owner.avatar || 'default_avatar.png'} alt="User avatar" className="object-contain w-[full] h-full" />
                                 </div>
-                            ))
+                                  
+                                  <div className='w-[40rem] justify-end h-[100%]  '>
+
+                                  <div className='flex h-[26%] '>
+                                  <div>{comment.owner.username}</div>
+                                  <div className='ml-[1%] font-light'>{timeAgo(comment.createdAt)}</div>
+                                  </div>
+
+                                  <div className='w-full overflow-hidden  '>{comment.content} </div>
+                                  <div className='flex items-center'>
+                                    <button className="p-2 text-green-500 hover:text-green-700"><AiOutlineLike /></button>
+                                    <span className="mx-2 text-sm">{comment.likesCount || 0}</span>
+                                    <button className="p-2 text-red-500 hover:text-red-700"><BiDislike /></button>
+                                </div>
+
+
+                                  </div>
+                                
+                                </div>
+                            
+                        ))
                         }
                     </InfiniteScroll>
                 </div>  
