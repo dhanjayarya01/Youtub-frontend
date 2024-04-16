@@ -41,7 +41,8 @@ function Likedvideo() {
                         />
                     ))
                   
-                }      Likedvideo</div>
+                } 
+        </div>
   )
 }
 

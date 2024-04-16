@@ -105,7 +105,7 @@ class ApiService {
 
   async getWatchHistory() {
     try {
-      const response = await this.axiosInstance.get('/users/watch-history');
+      const response = await this.axiosInstance.get('/users/history');
       return response.data;
     } catch (error) {
       throw error.response.data;
