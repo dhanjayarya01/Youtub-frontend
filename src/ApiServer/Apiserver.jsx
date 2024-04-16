@@ -206,7 +206,7 @@ class ApiService {
   
   async toggleVideoLike(videoId) {
     try {
-      const response = await this.axiosInstance.post(`/videos/${videoId}/like`);
+      const response = await this.axiosInstance.post(`/likes/toggle/v/${videoId}`);
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -215,7 +215,7 @@ class ApiService {
 
   async toggleCommentLike(commentId) {
     try {
-      const response = await this.axiosInstance.post(`/comments/${commentId}/like`);
+      const response = await this.axiosInstance.post(`/likes/toggle/c/${commentId}`);
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -239,6 +239,36 @@ class ApiService {
       throw error.response.data;
     }
   }
+
+
+
+  async toggleSubscription(channelId) {
+  try {
+    const response = await this.axiosInstance.post(`/subcription/c/${channelId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
 }
+
+async getUserChannelSubscribers(channelId) {
+  try {
+    const response = await this.axiosInstance.get(`/subcription/c/${channelId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+}
+
+async getSubscribedChannels(subscriberId) {
+  try {
+    const response = await this.axiosInstance.get(`/subcription/u/${subscriberId}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+}
+}
+
 
 export default ApiService;

@@ -19,7 +19,6 @@ function App() {
  const getCurrentUser =async()=>{
    
    const user= await apiContext.getCurrentUser();
-   console.log("user",user.data)
    setCurrentuserinfo(user.data)
    setIsLoggedIn(true)
 

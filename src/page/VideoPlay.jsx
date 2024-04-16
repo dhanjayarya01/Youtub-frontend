@@ -16,11 +16,10 @@ function VideoPlay() {
     setVideo(Video.data[0]);
   }
   useEffect(()=>{
+    console.log("videoplay call")
     getvideobyId()
 },[videoId])
 
-
-  console.log("video set",video)
 
   return (
     
