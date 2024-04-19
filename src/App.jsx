@@ -13,46 +13,41 @@ import VideoPlay from './page/VideoPlay';
 import { useContext } from 'react';
 import ApiContext from './ApiServer/ApiContext';
 import Userchannel from './page/channel/Userchannel';
+import ChannelVideo from './page/channel/ChannelVideo';
 
 function App() {
- const{apiContext,currentuserinfo,setCurrentuserinfo,isLoggedIn,setIsLoggedIn}=useContext(ApiContext)
- const getCurrentUser =async()=>{
-   
-   const user= await apiContext.getCurrentUser();
-   setCurrentuserinfo(user.data)
-   setIsLoggedIn(true)
+ const { apiContext, currentuserinfo, setCurrentuserinfo, isLoggedIn, setIsLoggedIn } = useContext(ApiContext);
 
+ const getCurrentUser = async () => {
+   const user = await apiContext.getCurrentUser();
+   setCurrentuserinfo(user.data);
+   setIsLoggedIn(true);
  }
- useEffect(()=>{
-  getCurrentUser()
- },[isLoggedIn])
-  return (
-    <Router>
-      
-       <Sidebar>
-      <Routes>
-      
-        
-        
-          <Route path="/" element={<Home/>}/>
-          <Route path="/likedvideo" element={<Likedvideo/>}/>
-          <Route path="/history" element={<History/>}/>
-          <Route path="/yourchannel" element={<Yourchannel/>}/>
-          <Route path="/myprofile" element={<Myprofile/>}/>
-          <Route path="/logout" element={<Logout/>}/>
-          <Route path="/Signup" element={<Signup/>}/>
-          <Route path="/login" element={<Login/>}/>
-          <Route path="/channel/:username" element={<Userchannel/>}/>
 
-          <Route path="/v/:videoId" element={isLoggedIn ?<VideoPlay/> : <Signup/>}/>
-          
-  
-      </Routes>
-      </Sidebar>
-      
-    </Router>
-  );
+ useEffect(() => {
+   getCurrentUser();
+ }, [isLoggedIn]);
+
+ return (
+   <Router>
+     <Sidebar>
+       <Routes>
+         <Route path="/" element={<Home />} />
+         <Route path="/likedvideo" element={<Likedvideo />} />
+         <Route path="/history" element={<History />} />
+         <Route path="/yourchannel" element={<Yourchannel/>}>
+          <Route path="channelvideo" element={<ChannelVideo/>}/>
+          </Route>
+         <Route path="/myprofile" element={<Myprofile />} />
+         <Route path="/logout" element={<Logout />} />
+         <Route path="/Signup" element={<Signup />} />
+         <Route path="/login" element={<Login />} />
+         <Route path="/channel/:username" element={<Userchannel />} />
+         <Route path="/v/:videoId" element={isLoggedIn ? <VideoPlay /> : <Signup />} />
+       </Routes>
+     </Sidebar>
+   </Router>
+ );
 }
 
 export default App;
-

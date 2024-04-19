@@ -23,11 +23,12 @@ function Getuserchannel({ channelname }) {
   }, [currentuserinfo]);
 
   const location = useLocation();
+  console.log(location.pathname)
 
   return (
     isloading ? <ChannelSkeleton /> : (
-      <div className='w-full p-14 pt-0 bg h-screen'>
-        <div className='w-full h-[35%]'>
+      <div className='w-full p-14 pb-0 pt-0 bg h-{100%}'>
+        <div className='w-full h-[13rem]'>
           <div
             style={{
               height: '100%',
@@ -52,16 +53,16 @@ function Getuserchannel({ channelname }) {
               <span className='ml-[2%] font-normal'>{`${channeldata?.subscribersCount || 0} subscribers`}</span>
               <span className='ml-[2%] font-normal'>{`${channeldata?.videoscount || 0} Videos`}</span>
             </div>
-            <button onClick={() => navigate('/myprofile')} className='w-[18%] h-[24%] rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Update Details</button>
+            <button onClick={() => navigate('/myprofile')} className='w-[18%] h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Update Details</button>
           </div>
         </div>
 
         <div>
-          <div className='flex bg-red-900 items-center text-xl border-b-2 h-[3rem]'>
-            <Link className={`mr-[8%] ${location.pathname === '/channelvideo' && 'border-b-2 border-black'}`} to="/channelvideo">Videos</Link>
-            <Link className={`mr-[8%] ${location.pathname === '/playlist' && 'border-b-2 border-black'}`} to="/playlist">Playlist</Link>
-            <Link className={`mr-[8%] ${location.pathname === '/about' && 'border-b-2 border-black'}`} to="/about">About</Link>
-            <Link className={`mr-[8%] ${location.pathname === '/contact' && 'border-b-2 border-black'}`} to="/contact">Contact</Link>
+          <div className='flex  items-center text-xl border-b-2 h-[3rem]'>
+            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/channelvideo' && 'border-b-2 border-red-900'}`} to="channelvideo">Videos</Link>
+            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/playlist' && 'border-b-2 border-black'}`} to="/playlist">Playlist</Link>
+            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/about' && 'border-b-2 border-black'}`} to="/about">About</Link>
+            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/contact' && 'border-b-2 border-black'}`} to="/contact">Contact</Link>
           </div>
         </div>
       </div>
