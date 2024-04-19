@@ -6,7 +6,7 @@ function VideoCardSkeleton() {
                 </div>
             </div>
             <div className="flex justify-start h-[32%] items-start pt-4 px-2 gap-2">
-                <div className="w-10 h-10 bg-gray-400 rounded-full"></div>
+                <div className="w-10 h-10 bg-gray-400 animate-bounce rounded-full"></div>
                 <div className="w-[90%]">
                     <div className="h-6 bg-gray-400 rounded mb-2"></div>
                     <div className="h-4 bg-gray-400 rounded w-3/4"></div>
