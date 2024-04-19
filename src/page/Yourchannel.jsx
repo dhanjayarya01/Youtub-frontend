@@ -1,8 +1,12 @@
-import React from 'react'
-
+import React,{useContext} from 'react'
+import Getuserchannel from '../component/Getuserchannel'
+import ApiContext from '../ApiServer/ApiContext'
 function Yourchannel() {
+  const {apiContext,currentuserinfo}=useContext(ApiContext)
+
   return (
-    <div>Yourchannel</div>
+
+    <Getuserchannel channelname={currentuserinfo.username}/>
   )
 }
 

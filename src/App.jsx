@@ -12,7 +12,7 @@ import Login from './component/Login';
 import VideoPlay from './page/VideoPlay';
 import { useContext } from 'react';
 import ApiContext from './ApiServer/ApiContext';
-
+import Userchannel from './page/channel/Userchannel';
 
 function App() {
  const{apiContext,currentuserinfo,setCurrentuserinfo,isLoggedIn,setIsLoggedIn}=useContext(ApiContext)
@@ -38,11 +38,12 @@ function App() {
           <Route path="/likedvideo" element={<Likedvideo/>}/>
           <Route path="/history" element={<History/>}/>
           <Route path="/yourchannel" element={<Yourchannel/>}/>
-
           <Route path="/myprofile" element={<Myprofile/>}/>
           <Route path="/logout" element={<Logout/>}/>
           <Route path="/Signup" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/channel/:username" element={<Userchannel/>}/>
+
           <Route path="/v/:videoId" element={isLoggedIn ?<VideoPlay/> : <Signup/>}/>
           
   

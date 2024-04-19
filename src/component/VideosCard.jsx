@@ -16,7 +16,7 @@ function VideosCard({
 
     const handleAvatarClick = (e) => {
         e.stopPropagation();
-        // navigate(`/channel/${channelName}`);
+        navigate(`/channel/${channelName}`);
     };
   
     return (

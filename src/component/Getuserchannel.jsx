@@ -1,0 +1,72 @@
+import React, { useContext, useEffect, useState } from 'react';
+import { Link, useNavigate, useLocation } from 'react-router-dom';
+import ApiContext from '../ApiServer/ApiContext';
+import ChannelSkeleton from '../skeleton/ChannelSkeleton';
+
+function Getuserchannel({ channelname }) {
+  const navigate = useNavigate();
+  const { apiContext, currentuserinfo } = useContext(ApiContext);
+  const [channeldata, setChanneldata] = useState();
+  const [userIscurrentuser, setUserIscurrentuser] = useState(false);
+  const [isloading, setIsloading] = useState(true);
+
+  const getUserChannelProfile = async () => {
+    console.log(channelname);
+    const channeldata = await apiContext.getUserChannelProfile(channelname);
+    setChanneldata(channeldata.data);
+    setIsloading(false);
+    console.log("userchannel", channeldata);
+  };
+
+  useEffect(() => {
+    getUserChannelProfile();
+  }, [currentuserinfo]);
+
+  const location = useLocation();
+
+  return (
+    isloading ? <ChannelSkeleton /> : (
+      <div className='w-full p-14 pt-0 bg h-screen'>
+        <div className='w-full h-[35%]'>
+          <div
+            style={{
+              height: '100%',
+              width: '100%',
+              borderRadius: '19px',
+              border: '1px solid #000',
+              backgroundImage: `url(${channeldata?.coverImage})`,
+              backgroundSize: "40%",
+              backgroundPosition: "center",
+              backgroundRepeat: "no-repeat",
+            }}
+          ></div>
+        </div>
+
+        <div className='w-full flex h-[40%]'>
+          <div className='w-[20%] h-full p-3'>
+            <img className='rounded-full border-[0.1rem] border-zinc-950 overflow-visible h-full' src={channeldata?.avatar} alt="" />
+          </div>
+          <div className='w-[80%] h-full pt-5'>
+            <div className='w-full h-[31%] text-5xl font-medium'>{channeldata?.fullName}</div>
+            <div className='w-full mt-[1%] h-[20%] flex'><span>{`@${channeldata?.username}`}</span>
+              <span className='ml-[2%] font-normal'>{`${channeldata?.subscribersCount || 0} subscribers`}</span>
+              <span className='ml-[2%] font-normal'>{`${channeldata?.videoscount || 0} Videos`}</span>
+            </div>
+            <button onClick={() => navigate('/myprofile')} className='w-[18%] h-[24%] rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Update Details</button>
+          </div>
+        </div>
+
+        <div>
+          <div className='flex bg-red-900 items-center text-xl border-b-2 h-[3rem]'>
+            <Link className={`mr-[8%] ${location.pathname === '/channelvideo' && 'border-b-2 border-black'}`} to="/channelvideo">Videos</Link>
+            <Link className={`mr-[8%] ${location.pathname === '/playlist' && 'border-b-2 border-black'}`} to="/playlist">Playlist</Link>
+            <Link className={`mr-[8%] ${location.pathname === '/about' && 'border-b-2 border-black'}`} to="/about">About</Link>
+            <Link className={`mr-[8%] ${location.pathname === '/contact' && 'border-b-2 border-black'}`} to="/contact">Contact</Link>
+          </div>
+        </div>
+      </div>
+    )
+  );
+}
+
+export default Getuserchannel;

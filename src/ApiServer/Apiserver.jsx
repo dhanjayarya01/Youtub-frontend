@@ -96,7 +96,7 @@ class ApiService {
 
   async getUserChannelProfile(username) {
     try {
-      const response = await this.axiosInstance.get(`/users/channel/${username}`);
+      const response = await this.axiosInstance.get(`/users/c/${username}`);
       return response.data;
     } catch (error) {
       throw error.response.data;
