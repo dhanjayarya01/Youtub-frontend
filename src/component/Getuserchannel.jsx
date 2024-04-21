@@ -7,23 +7,26 @@ function Getuserchannel({ channelname }) {
   const navigate = useNavigate();
   const { apiContext, currentuserinfo } = useContext(ApiContext);
   const [channeldata, setChanneldata] = useState();
-  const [userIscurrentuser, setUserIscurrentuser] = useState(false);
+  const [channelvideo, setChannelvideo] = useState([]);
   const [isloading, setIsloading] = useState(true);
 
   const getUserChannelProfile = async () => {
     console.log(channelname);
-    const channeldata = await apiContext.getUserChannelProfile(channelname);
-    setChanneldata(channeldata.data);
+    const channel = await apiContext.getUserChannelProfile(channelname);
+    setChanneldata(channel?.data);
     setIsloading(false);
-    console.log("userchannel", channeldata);
+    setChannelvideo(channel?.data?.channelvideos);
+    
   };
 
+
+
+  
   useEffect(() => {
     getUserChannelProfile();
   }, [currentuserinfo]);
 
   const location = useLocation();
-  console.log(location.pathname)
 
   return (
     isloading ? <ChannelSkeleton /> : (
@@ -59,7 +62,7 @@ function Getuserchannel({ channelname }) {
 
         <div>
           <div className='flex  items-center text-xl border-b-2 h-[3rem]'>
-            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/channelvideo' && 'border-b-2 border-red-900'}`} to="channelvideo">Videos</Link>
+            <button onClick={()=>navigate('/yourchannel/channelvideo',{state:channelvideo})} className={`mr-[8%] ${location.pathname === '/yourchannel/channelvideo' && 'border-b-2 border-red-900'}`}>Videos</button>
             <Link className={`mr-[8%] ${location.pathname === '/yourchannel/playlist' && 'border-b-2 border-black'}`} to="/playlist">Playlist</Link>
             <Link className={`mr-[8%] ${location.pathname === '/yourchannel/about' && 'border-b-2 border-black'}`} to="/about">About</Link>
             <Link className={`mr-[8%] ${location.pathname === '/yourchannel/contact' && 'border-b-2 border-black'}`} to="/contact">Contact</Link>
