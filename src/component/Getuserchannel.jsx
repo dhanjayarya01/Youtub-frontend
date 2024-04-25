@@ -2,25 +2,44 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import ApiContext from '../ApiServer/ApiContext';
 import ChannelSkeleton from '../skeleton/ChannelSkeleton';
+import { CiBellOn } from "react-icons/ci";
 
+import Uploadvideo from './Uploadvideo';
 function Getuserchannel({ channelname }) {
   const navigate = useNavigate();
   const { apiContext, currentuserinfo } = useContext(ApiContext);
   const [channeldata, setChanneldata] = useState();
   const [channelvideo, setChannelvideo] = useState([]);
   const [isloading, setIsloading] = useState(true);
-
+  const [isSubscribed, setIsSubscribed] = useState(false);
+  const [subscribercount, setSubscribercount] = useState();
+  const [sameUser,setSameUser]=useState(false)
+  const [uploadVideoOpen,setUploadVideoOpen]=useState(false)
+  
   const getUserChannelProfile = async () => {
-    console.log(channelname);
     const channel = await apiContext.getUserChannelProfile(channelname);
+    setIsSubscribed(channel?.data?.isSubscribed)
+    setSubscribercount(channel?.data?.subscribersCount)
     setChanneldata(channel?.data);
     setIsloading(false);
     setChannelvideo(channel?.data?.channelvideos);
     
+    
   };
 
+    useEffect(()=>{
 
+      if(channelname==channeldata?.username){
+        setSameUser(true)
+      }
+    })
 
+  const handlesubscription =async()=>{
+    setIsSubscribed(!isSubscribed)
+    setSubscribercount(prev => isSubscribed ? prev - 1 : prev + 1);
+   const toggle= await apiContext.toggleSubscription(channeldata._id)
+
+  }
   
   useEffect(() => {
     getUserChannelProfile();
@@ -28,10 +47,24 @@ function Getuserchannel({ channelname }) {
 
   const location = useLocation();
 
+
+
+  const toggleupload=()=>{
+    setUploadVideoOpen(true)
+  }
+
   return (
     isloading ? <ChannelSkeleton /> : (
+
+      
       <div className='w-full p-14 pb-0 pt-0 bg h-{100%}'>
-        <div className='w-full h-[13rem]'>
+        { uploadVideoOpen&& <div className='absolute z-50 left-[14%] right-[14%] top-2 bottom-2 bg-white rounded-2xl border-2'>
+          <Uploadvideo setUploadVideoOpen={setUploadVideoOpen}/>
+          
+          </div>}
+
+
+        <div className='w-full  h-[13rem]'>
           <div
             style={{
               height: '100%',
@@ -46,20 +79,31 @@ function Getuserchannel({ channelname }) {
           ></div>
         </div>
 
-        <div className='w-full flex h-[40%]'>
+        <div className='w-full flex h-[38%]'>
           <div className='w-[20%] h-full p-3'>
             <img className='rounded-full border-[0.1rem] border-zinc-950 overflow-visible h-full' src={channeldata?.avatar} alt="" />
           </div>
           <div className='w-[80%] h-full pt-5'>
             <div className='w-full h-[31%] text-5xl font-medium'>{channeldata?.fullName}</div>
             <div className='w-full mt-[1%] h-[20%] flex'><span>{`@${channeldata?.username}`}</span>
-              <span className='ml-[2%] font-normal'>{`${channeldata?.subscribersCount || 0} subscribers`}</span>
+              <span className='ml-[2%] font-normal'>{`${subscribercount|| 0} subscribers`}</span>
               <span className='ml-[2%] font-normal'>{`${channeldata?.videoscount || 0} Videos`}</span>
             </div>
-            <button onClick={() => navigate('/myprofile')} className='w-[18%] h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Update Details</button>
+
+              <div className='button  flex'>
+             {!sameUser ? <button onClick={handlesubscription} className={`${isSubscribed ?'w-[18%]': 'w-[16%]'} active:animate-ping duration-[1.3s] justify-center items-center flex   h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]`}>
+              {isSubscribed && <div className='w-[20%] h-full text-3xl flex items-center ml-[-2rem] '><CiBellOn/></div>}
+              <div className='h-full flex items-center  ml-1'>{isSubscribed ?'Subscribed':'Subscribe' }</div></button>:
+              
+             <button onClick={toggleupload} className='w-[18%] ml-[2%] h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Upload Video</button>
+              }
+
+
+             <button onClick={() => navigate('/myprofile')} className='w-[18%] ml-[2%] h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Update Details</button>
+             </div>
+          
           </div>
         </div>
-
         <div>
           <div className='flex  items-center text-xl border-b-2 h-[3rem]'>
             <button onClick={()=>navigate('/yourchannel/channelvideo',{state:channelvideo})} className={`mr-[8%] ${location.pathname === '/yourchannel/channelvideo' && 'border-b-2 border-red-900'}`}>Videos</button>

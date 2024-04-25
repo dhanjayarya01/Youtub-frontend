@@ -4,14 +4,16 @@ import signupq from "/image/signupq.png"
 import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import ApiContext from '../ApiServer/ApiContext'
-
+import { MdCancel } from "react-icons/md";
+import { useLocation } from 'react-router-dom'
 
  function Login() {
+  const location =useLocation()
   const[email,setEmail]=useState("")
   const[password,setPassword]=useState("")
   const {apiContext,setIsLoggedIn}=useContext(ApiContext)
 
-
+  console.log("login",location)
   const navigate=useNavigate()
     const handleSubmit = async () => {
       console.log("email",email)
@@ -21,6 +23,7 @@ import ApiContext from '../ApiServer/ApiContext'
         }
     
       try {
+              
         const response = await apiContext.loginUser(userdata)
         console.log('User Login successfully:', response);
         navigate("/")
@@ -32,8 +35,13 @@ import ApiContext from '../ApiServer/ApiContext'
       }
     };
 
+    
     return (
-      <div className='container flex-1 pl-[6%]  pr-[6%] pb-[2.5%] pt-[2.5%] bg-[#F5EAFF]'>
+
+      <div className='absolute overflow-scroll no-scrollbar z-50 left-[12%] right-[12%] top-2 bottom-2 bg-white rounded-2xl border-2'>
+     
+     <button  onClick={()=>navigate("/")} className='w-[4%] absolute  left-1   z-40 hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
+
    
    
       <div className='outerdiv h-[33.89rem] ,w-[100%] bg-[#FFFFFF] drop-shadow-lg flex justify-between box-border'>
@@ -55,7 +63,7 @@ import ApiContext from '../ApiServer/ApiContext'
             
             <div className='flex mt-[4%] ml-[23%]'>
                <p>Don't have an account</p>
-               <Link to="/Signup" className='ml-[3%] text-[#C640FF]'>Signup</Link>
+               <Link to={-1} className='ml-[3%] text-[#C640FF]'>Signup</Link>
             </div>
         </div>
        </div>
@@ -72,6 +80,7 @@ import ApiContext from '../ApiServer/ApiContext'
    
    
    
+     
       </div>
    
      )

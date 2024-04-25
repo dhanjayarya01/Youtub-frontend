@@ -4,7 +4,12 @@ import Input from './Input'
 import ApiContext from '../ApiServer/ApiContext'
 import { useContext } from 'react'
 import { Link } from 'react-router-dom'
+import { MdCancel } from "react-icons/md";
+import { useNavigate } from 'react-router-dom';
+
 function Signup() {
+  const navigate = useNavigate(); // Initialize useHistory hook
+
   const {apiContext}=useContext(ApiContext)
   const[username,setUsername]=useState("")
   const[fullName,setfullName]=useState("")
@@ -58,23 +63,26 @@ function Signup() {
       console.error('Registration error:', error);
     }
   };
-  
+ 
 
   return (
-   <div className=' flex h-screen  w-full bg-red-900'>
-
-
-   <div className='outerdiv h-[100%] w-[100%] bg-yellow-200 drop-shadow-lg flex justify-between box-border'>
-
-    <div className='inputouter h-[100%] w-[100%]  p-20 pr-0 pt-4'>
+    <div className='absolute overflow-scroll no-scrollbar z-50 left-[12%] right-[12%] top-2 bottom-2 bg-white rounded-2xl border-2'>
      
-      <div className='logodiv h-[16%] w-[75%] '> 
+     <button onClick={()=>navigate('/')} className='w-[4%] absolute  left-1   z-40 hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
+
+   <div className=' absolute flex h-screen  w-full '>
+
+
+   <div className='outerdiv h-[100%] w-[100%]    drop-shadow-sm  flex justify-between box-border'>
+    <div className='inputouter h-[100%] w-[50%]  p-20 pr-0 pt-4'>
+     
+      <div className='logodiv h-[16%]  w-[90%]  '> 
         <div className='flex items-center   mb-[2%] '>
           <div  className=' flex ml-[35%] h-8  w-[10%] mr-2 '><img className='h-[100%] w-[100%]'  src='/image/yt1.png'></img></div>
-        <div className=' font-bold'>YOUTUB</div>
+        <div className=' font-bold'>YOUTUB </div>
         </div>
          
-     <div className='imageouter h-[100%] w-[100%]  border-[#C640FF] border-[0.1rem] rounded-md mb-[3%] flex items-center ' >
+     <div className='imageouter h-[100%] w-[100%]   border-[#C640FF] border-[0.1rem] rounded-md mb-[3%] flex items-center ' >
         
         <div className=' avatar h-[70%] w-[20%] ml-[2%] rounded-[50%] bg-green-700 pl-[8%]  '>
         <div onClick={avatarI} className='h-2'><img className='h-[1.1rem] w-36 bg-blue-700' src='/image/camera.png'></img></div>          
@@ -99,7 +107,7 @@ function Signup() {
          
          <div className='flex mt-[4%] ml-[23%]'>
             <p>Already have an account </p>
-            <Link to="/Login" className='ml-[3%] text-[#C640FF]'>Login</Link>
+            <Link to="/login" className='ml-[3%] text-[#C640FF]'>Login</Link>
          </div>
      </div>
     </div>
@@ -116,6 +124,7 @@ function Signup() {
 
 
 
+   </div>
    </div>
 
   )

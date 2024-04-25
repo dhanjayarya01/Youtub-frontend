@@ -14,6 +14,7 @@ import { useContext } from 'react';
 import ApiContext from './ApiServer/ApiContext';
 import Userchannel from './page/channel/Userchannel';
 import ChannelVideo from './page/channel/ChannelVideo';
+import AuthLayout from './Route/AuthLayout';
 
 function App() {
  const { apiContext, currentuserinfo, setCurrentuserinfo, isLoggedIn, setIsLoggedIn } = useContext(ApiContext);
@@ -40,8 +41,11 @@ function App() {
           </Route>
          <Route path="/myprofile" element={<Myprofile />} />
          <Route path="/logout" element={<Logout />} />
-         <Route path="/Signup" element={<Signup />} />
-         <Route path="/login" element={<Login />} />
+
+         <Route path="/signup" element={<Signup />} />
+         <Route path="/login" element={<Login/>} />
+         
+
          <Route path="/channel/:username" element={<Userchannel />} />
          <Route path="/v/:videoId" element={isLoggedIn ? <VideoPlay /> : <Signup />} />
        </Routes>

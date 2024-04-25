@@ -13,29 +13,36 @@ import { useState } from "react";
 import { all } from "axios";
 import Header from "./Header";
 
+import { useContext } from "react";
+import ApiContext from "../ApiServer/ApiContext";
 
 const route=[
     {
+       
         path:"/",
         name:"Home",
         icon:<FaHome/>
     },
     {
+      
         path:"/likedvideo",
         name:"likedvideo",
         icon:<SlLike/>
     },
     {
+       
         path:"/history",
         name:"History",
         icon:<RiHistoryLine/>
     },
     {
+      
         path:"/yourchannel",
         name:"yourchannel",
         icon:<ImProfile/>
     },
     {
+      
         path:"/myprofile",
         name:"Myprofile",
         icon:<VscAccount/>
@@ -48,6 +55,8 @@ const route=[
 ]
 
 const Sidebar=({children})=>{
+
+    const{isLoggedIn,setIsHomepage} =useContext(ApiContext)
     const [isopen,setIsopen]=useState(false)
  
     const location = useLocation();
@@ -63,7 +72,15 @@ const Sidebar=({children})=>{
             }
         }
     }
+    
     const toggle=()=>setIsopen(!isopen)
+
+    const handleNavclick=(name)=>{
+        if(name!=='Home'){
+            setIsHomepage(false)
+        }
+        console.log("hi",name)
+    }
     return(
              
              <div className="  flex h-screen  min-h-screen ">
@@ -84,17 +101,17 @@ const Sidebar=({children})=>{
               <section className={`pt-8 ${isopen ? 'pr-1 pl-1' : 'pl-1 pr-1'}`}>
                 {
                     route.map((route)=>(
-                        <NavLink  to={route.path} key={route.name} >
+                         <NavLink onClick={()=>handleNavclick(route.name)} to={route.name =='Home' ? (!isLoggedIn ? '/Signup' : route.path) : '/Signup'} key={route.name} > 
                            <div className={` mt-1 pl-6 flex w-{100%} rounded-md h-[2.8rem] justify-start items-center hover:bg-[#F2F2F2] transition-all duration-2000 ease-cubic-bezier(0.06, -0.28, 0.735, 0.045) ${location.pathname === route.path &&isopen ? 'bg-[#F2F2F2]' : ''}`}>
                             <div className={`text-2xl pl--2 ${location.pathname === route.path && !isopen ? ' text-red-800' : ''}`}>{route.icon}</div>    
                          <AnimatePresence>
                            <motion.div initial="hidden" animate="show" exit="hidden" variants={textanimation} className=" text-[1rem] w-[44rem]  ml-5">{route.name}</motion.div>
                          </AnimatePresence>
-                            </div>
+                            </div>  
                         </NavLink>
                     ))
                     }
-                    
+                     
                    <div className="mt-[67%] ">
 
                      <NavLink to="/logout" key="logout" ><div></div>

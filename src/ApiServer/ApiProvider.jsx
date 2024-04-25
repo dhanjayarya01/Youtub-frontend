@@ -5,12 +5,15 @@ import Apiservice from "./Apiserver";
 const ApiProvider=({children})=>{
     const[isLoggedIn,setIsLoggedIn]=useState(false)
     const[currentuserinfo,setCurrentuserinfo]=useState({})
+    const[isHomepage,setIsHomepage]=useState(true)
     const defaultValue={
         apiContext:new Apiservice(), 
         isLoggedIn,
+        isHomepage,
         currentuserinfo,
         setCurrentuserinfo,
-        setIsLoggedIn
+        setIsLoggedIn,
+        setIsHomepage
 }
 
 return (

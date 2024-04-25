@@ -4,16 +4,26 @@ import ApiContext from '../ApiServer/ApiContext';
 import VideosCard from '../component/VideosCard';
 import VideoCardSkeleton from '../skeleton/VideoCardSkeleton'; // Import the skeleton component
 import InfiniteScroll from '../component/InfiniteScroll';
+import {  useNavigate } from 'react-router-dom';
+import Signup from '../component/Signup';
+import AuthLayout from '../Route/AuthLayout';
 
 function Home() {
-    const { apiContext } = useContext(ApiContext);
+
+    const navigation=useNavigate()
+    const { apiContext,isLoggedIn,isHomepage} = useContext(ApiContext);
     const [videos, setVideos] = useState([]);
     const [loading, setLoading] = useState(true);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [isSignupopen,setSignupopen]=useState(false)
 
     useEffect(() => {
         loadInitialVideos();
+        console.log(isLoggedIn)
+        setSignupopen(isLoggedIn)
+
+        console.log("set",isSignupopen)
     }, []);
         const loadInitialVideos = async () => {
             const initialData = await fetchVideos(currentPage);
@@ -25,6 +35,7 @@ function Home() {
    
     const fetchVideos = async (page) => {
         try {
+            
             const response = await apiContext.getAllVideos({ page });
             return response.data;
         } catch (error) {
@@ -42,7 +53,9 @@ function Home() {
         }
     }, [currentPage, totalPages]);
 
+    console.log("hlhh",isHomepage)
     return (
+        <>
         <div className="text-white  mb-20 sm:m-0 max-h-screen w-[74rem] grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1">
             <InfiniteScroll fetchMore={loadMoreVideos} hasNextPage={currentPage < totalPages && !loading}>
                 {loading ?
@@ -64,6 +77,7 @@ function Home() {
                 }
             </InfiniteScroll>
         </div>
+    </>
     );
 }
 

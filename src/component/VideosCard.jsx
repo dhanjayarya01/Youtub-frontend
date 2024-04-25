@@ -28,7 +28,7 @@ function VideosCard({
                 <div className="relative sm:h-52  h-44    ">
                     <img
                         src={thumbnail}
-                        className="object-cover border-[0.011rem] hover:rounded-none transition-all duration-2000  rounded-2xl w-full h-full"
+                        className="object-fit border-[0.011rem] hover:rounded-none transition-all duration-2000  rounded-2xl w-full h-full"
                     />
                     <span className="absolute bottom-2 right-2 rounded-lg text-sm bg-black py-1 px-2">
                         {formatDuration(duration)}
