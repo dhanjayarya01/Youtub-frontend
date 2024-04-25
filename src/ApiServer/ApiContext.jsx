@@ -8,9 +8,12 @@ export const ApiContext=createContext({
      isLoggedIn:true,
      isHomepage:true,
      currentuserinfo:"",
+     currentroutename:"",
+
     setCurrentuserinfo:()=>{},
     setIsLoggedIn:()=>{},
-    setIsHomepage:()=>{}
+    setIsHomepage:()=>{},
+    setCurrentroutename:()=>{}
 })
 
 export default ApiContext

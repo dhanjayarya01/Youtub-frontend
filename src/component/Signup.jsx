@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom';
 function Signup() {
   const navigate = useNavigate(); // Initialize useHistory hook
 
-  const {apiContext}=useContext(ApiContext)
+  const {apiContext,setIsHomepage}=useContext(ApiContext)
   const[username,setUsername]=useState("")
   const[fullName,setfullName]=useState("")
   const[email,setEmail]=useState("")
@@ -68,7 +68,7 @@ function Signup() {
   return (
     <div className='absolute overflow-scroll no-scrollbar z-50 left-[12%] right-[12%] top-2 bottom-2 bg-white rounded-2xl border-2'>
      
-     <button onClick={()=>navigate('/')} className='w-[4%] absolute  left-1   z-40 hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
+     <button onClick={()=>setIsHomepage(true)} className='w-[4%] absolute  left-1   z-40 hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
 
    <div className=' absolute flex h-screen  w-full '>
 

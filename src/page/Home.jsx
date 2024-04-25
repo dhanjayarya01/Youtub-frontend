@@ -56,6 +56,7 @@ function Home() {
     console.log("hlhh",isHomepage)
     return (
         <>
+        {!isHomepage && ( !isLoggedIn ? <Signup/> :null)}
         <div className="text-white  mb-20 sm:m-0 max-h-screen w-[74rem] grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1">
             <InfiniteScroll fetchMore={loadMoreVideos} hasNextPage={currentPage < totalPages && !loading}>
                 {loading ?

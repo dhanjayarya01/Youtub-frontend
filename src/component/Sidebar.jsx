@@ -56,7 +56,7 @@ const route=[
 
 const Sidebar=({children})=>{
 
-    const{isLoggedIn,setIsHomepage} =useContext(ApiContext)
+    const{isLoggedIn,setIsHomepage,setCurrentroutename} =useContext(ApiContext)
     const [isopen,setIsopen]=useState(false)
  
     const location = useLocation();
@@ -76,9 +76,12 @@ const Sidebar=({children})=>{
     const toggle=()=>setIsopen(!isopen)
 
     const handleNavclick=(name)=>{
+        setCurrentroutename(name)
         if(name!=='Home'){
+            console.log(name)
             setIsHomepage(false)
         }
+        else{setIsHomepage(true)}
         console.log("hi",name)
     }
     return(
@@ -101,7 +104,8 @@ const Sidebar=({children})=>{
               <section className={`pt-8 ${isopen ? 'pr-1 pl-1' : 'pl-1 pr-1'}`}>
                 {
                     route.map((route)=>(
-                         <NavLink onClick={()=>handleNavclick(route.name)} to={route.name =='Home' ? (!isLoggedIn ? '/Signup' : route.path) : '/Signup'} key={route.name} > 
+                        <NavLink onClick={()=>handleNavclick(route.name)} to= {!isLoggedIn ? '/' : route.path } key={route.name} >
+                        {/* <NavLink onClick={()=>handleNavclick(route.name)} to={route.name =='Home' ? (!isLoggedIn ? '/Signup' : route.path) : '/Signup'} key={route.name} > */}
                            <div className={` mt-1 pl-6 flex w-{100%} rounded-md h-[2.8rem] justify-start items-center hover:bg-[#F2F2F2] transition-all duration-2000 ease-cubic-bezier(0.06, -0.28, 0.735, 0.045) ${location.pathname === route.path &&isopen ? 'bg-[#F2F2F2]' : ''}`}>
                             <div className={`text-2xl pl--2 ${location.pathname === route.path && !isopen ? ' text-red-800' : ''}`}>{route.icon}</div>    
                          <AnimatePresence>

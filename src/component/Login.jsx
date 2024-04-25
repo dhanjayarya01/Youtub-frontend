@@ -5,15 +5,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import ApiContext from '../ApiServer/ApiContext'
 import { MdCancel } from "react-icons/md";
-import { useLocation } from 'react-router-dom'
+
 
  function Login() {
-  const location =useLocation()
   const[email,setEmail]=useState("")
   const[password,setPassword]=useState("")
-  const {apiContext,setIsLoggedIn}=useContext(ApiContext)
+  const {apiContext,setIsLoggedIn,currentroutename,setIsHomepage}=useContext(ApiContext)
 
-  console.log("login",location)
+
   const navigate=useNavigate()
     const handleSubmit = async () => {
       console.log("email",email)
@@ -23,10 +22,9 @@ import { useLocation } from 'react-router-dom'
         }
     
       try {
-              
         const response = await apiContext.loginUser(userdata)
         console.log('User Login successfully:', response);
-        navigate("/")
+        navigate(`/${currentroutename}`)
         setIsLoggedIn(true)
         const data= await apiContext.getCurrentUser()
       
@@ -35,12 +33,15 @@ import { useLocation } from 'react-router-dom'
       }
     };
 
-    
+    const handlecancel=()=>{
+      setIsHomepage(true)
+      navigate("/")
+    }
     return (
 
       <div className='absolute overflow-scroll no-scrollbar z-50 left-[12%] right-[12%] top-2 bottom-2 bg-white rounded-2xl border-2'>
      
-     <button  onClick={()=>navigate("/")} className='w-[4%] absolute  left-1   z-40 hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
+     <button  onClick={()=>handlecancel} className='w-[4%] absolute  left-1   z-40 hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
 
    
    
