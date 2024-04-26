@@ -97,8 +97,9 @@ const handlecancel=()=>{
 
         <div className=' cover h-[70%] w-[20%] ml-[18%]      pl-[8%] flex items-center ' >
           <div onClick={coverImage} className='h-2'><img className='h-[1.51rem] w-[12rem] mb-4 flex items-center' src='/image/camera.png'></img></div>
-          <input  className='h-60'ref={coverfileInputRef} type='file' accept='image/*' onChange={handleCoverImageChange} style={{visibility:'hidden'}}/>
-          </div> 
+          <input  className='h-0   bg-red-500'ref={coverfileInputRef} type='file' accept='image/*' onChange={handleCoverImageChange} style={{visibility:'hidden'}}/>
+         
+        </div> 
 
       </div> 
       <Input className={"mt-[2.2%] focus:border-[#FF5C40]"}placeholder={"Enter username"} type={"text"} text={"UserName"} value={username}  onChange={(e)=>setUsername(e.target.value)}/>
