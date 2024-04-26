@@ -78,11 +78,9 @@ const Sidebar=({children})=>{
     const handleNavclick=(name)=>{
         setCurrentroutename(name)
         if(name!=='Home'){
-            console.log(name)
             setIsHomepage(false)
         }
         else{setIsHomepage(true)}
-        console.log("hi",name)
     }
     return(
              

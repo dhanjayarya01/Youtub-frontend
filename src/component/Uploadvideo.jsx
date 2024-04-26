@@ -75,7 +75,7 @@ const handleThumbnail = (e) => {
 
      <div className='w-full sticky bg-white top-0 z-auto pl-2 pr-2 flex items-center border-b-[0.1rem]  justify-between h-[10%] ' >
       <div className='flex w-[20%] justify-evenly '>
-      <button onClick={handleCancel} className='w-[20%]  hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
+      <button onClick={handleCancel} className='w-[20%] text-[#FF5C40] hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
       <div className='h-full w-[80%] '>cancel uploading</div>
       </div>
 
@@ -101,7 +101,7 @@ const handleThumbnail = (e) => {
               backgroundRepeat: "no-repeat",
             }} className='w-[30%] h-full flex items-center  justify-center border-2 '>
         
-        <button onClick={ThumbnailRef} className='w-[20%] h-[20%]  '> <img  src="image/camera.png" alt="Thumbnail" /></button>
+        <button onClick={ThumbnailRef} className='w-[20%] h-[20%]  '> <img  src="image/camera.png" alt="click" /></button>
         <input className='h-0 w-0' ref={ThumbnailfileRef} type='file' accept='image/*' onChange={handleThumbnail} style={{visibility:'hidden'}}/>
  
         </div>

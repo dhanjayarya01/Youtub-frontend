@@ -23,7 +23,6 @@ function Home() {
         console.log(isLoggedIn)
         setSignupopen(isLoggedIn)
 
-        console.log("set",isSignupopen)
     }, []);
         const loadInitialVideos = async () => {
             const initialData = await fetchVideos(currentPage);
@@ -53,7 +52,6 @@ function Home() {
         }
     }, [currentPage, totalPages]);
 
-    console.log("hlhh",isHomepage)
     return (
         <>
         {!isHomepage && ( !isLoggedIn ? <Signup/> :null)}

@@ -1,5 +1,6 @@
 import React, { useState,useRef} from 'react'
-import signupq from "/image/signupq.png"
+// import signupq from "/image/signupq.png"
+import study from "/image/study.png"
 import Input from './Input'
 import ApiContext from '../ApiServer/ApiContext'
 import { useContext } from 'react'
@@ -8,7 +9,7 @@ import { MdCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
 
 function Signup() {
-  const navigate = useNavigate(); // Initialize useHistory hook
+  const navigate = useNavigate(); 
 
   const {apiContext,setIsHomepage}=useContext(ApiContext)
   const[username,setUsername]=useState("")
@@ -64,11 +65,15 @@ function Signup() {
     }
   };
  
-
+const handlecancel=()=>{
+  console.log("clicked")
+  setIsHomepage(true)
+  navigate('/')
+}
   return (
     <div className='absolute overflow-scroll no-scrollbar z-50 left-[12%] right-[12%] top-2 bottom-2 bg-white rounded-2xl border-2'>
      
-     <button onClick={()=>setIsHomepage(true)} className='w-[4%] absolute  left-1   z-40 hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
+     <button onClick={handlecancel} className='w-[4%] absolute  left-1 text-[#FF5C40]  z-40 hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
 
    <div className=' absolute flex h-screen  w-full '>
 
@@ -82,7 +87,7 @@ function Signup() {
         <div className=' font-bold'>YOUTUB </div>
         </div>
          
-     <div className='imageouter h-[100%] w-[100%]   border-[#C640FF] border-[0.1rem] rounded-md mb-[3%] flex items-center ' >
+     <div className='imageouter h-[100%] w-[100%]   border-[#FF5C40] border-[0.1rem] rounded-md mb-[3%] flex items-center ' >
         
         <div className=' avatar h-[70%] w-[20%] ml-[2%] rounded-[50%] bg-green-700 pl-[8%]  '>
         <div onClick={avatarI} className='h-2'><img className='h-[1.1rem] w-36 bg-blue-700' src='/image/camera.png'></img></div>          
@@ -96,18 +101,18 @@ function Signup() {
           </div> 
 
       </div> 
-      <Input className={"mt-[2.2%] focus:border-[#C640FF]"}placeholder={"Enter username"} type={"text"} text={"UserName"} value={username}  onChange={(e)=>setUsername(e.target.value)}/>
-      <Input labelclass={"mt-2"} className={"mt-[2.2%] focus:border-[#C640FF]"}placeholder={"Enter FullName"} type={"text"} text={"FullName"} value={fullName}  onChange={(e)=>setfullName(e.target.value)}/>
-      <Input labelclass={"mt-2"} className={"mt-[2.2%] focus:border-[#C640FF]"}placeholder={"Enter Email"} type={"text"} text={"Email Address"} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
-      <Input labelclass={"mt-2"} className={"mt-[2.2%] focus:border-[#C640FF]"}placeholder={"Enter Password"} type={"text"} text={"Password"} value={password}  onChange={(e)=>setPassword(e.target.value)}/>
-       <div className='mt-[8%] ml-[38%] h-[45%] w-[26%] rounded-md  bg-[#C640FF] flex justify-center items-center'>
+      <Input className={"mt-[2.2%] focus:border-[#FF5C40]"}placeholder={"Enter username"} type={"text"} text={"UserName"} value={username}  onChange={(e)=>setUsername(e.target.value)}/>
+      <Input labelclass={"mt-2"} className={"mt-[2.2%] focus:border-[#FF5C40]"}placeholder={"Enter FullName"} type={"text"} text={"FullName"} value={fullName}  onChange={(e)=>setfullName(e.target.value)}/>
+      <Input labelclass={"mt-2"} className={"mt-[2.2%] focus:border-[#FF5C40]"}placeholder={"Enter Email"} type={"text"} text={"Email Address"} value={email}  onChange={(e)=>setEmail(e.target.value)}/>
+      <Input labelclass={"mt-2"} className={"mt-[2.2%] focus:border-[#FF5C40]"}placeholder={"Enter Password"} type={"password"} text={"Password"} value={password}  onChange={(e)=>setPassword(e.target.value)}/>
+       <div className='mt-[8%] ml-[38%] h-[45%] w-[26%] rounded-md  bg-[#FF5C40] flex justify-center items-center'>
         <button onClick={handleSubmit}>Submit</button>
         </div>
 
          
          <div className='flex mt-[4%] ml-[23%]'>
             <p>Already have an account </p>
-            <Link to="/login" className='ml-[3%] text-[#C640FF]'>Login</Link>
+            <Link to="/login" className='ml-[3%] text-[#FF5C40]'>Login</Link>
          </div>
      </div>
     </div>
@@ -116,7 +121,7 @@ function Signup() {
     <div style={{
       height:'100%',
       width:'100%',
-      backgroundImage:`url(${signupq})`,
+      backgroundImage:`url(${study})`,
       backgroundSize:"cover"
     }} className='bg-[#E9EFFF] h-[100%] w-[100%]'></div>
    

@@ -1,6 +1,9 @@
 import React from "react";
 import { formatDuration, timeAgo } from "../helpers/timeAgo";
 import { useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
+import { useContext } from "react";
+import ApiContext from "../ApiServer/ApiContext";
 
 function VideosCard({
     thumbnail,
@@ -12,6 +15,9 @@ function VideosCard({
     createdAt,
     videoId,
 }) {
+
+    const {setCurrentroutename,currentroutename}=useContext(ApiContext)
+    const location =useLocation();
     const navigate = useNavigate();
 
     const handleAvatarClick = (e) => {
@@ -19,11 +25,18 @@ function VideosCard({
         navigate(`/channel/${channelName}`);
     };
   
+    const handleClick=()=>{
+        navigate(`/v/${videoId}`)
+        setCurrentroutename('')
+        console.log("videosCard",currentroutename)
+    }
+
+    
     return (
         <>
             <div
                 className="w-[98%]  sm:p-2 cursor-pointer mt-1 "
-                onClick={() => navigate(`/v/${videoId}`)}
+                onClick={handleClick}
             >
                 <div className="relative sm:h-52  h-44    ">
                     <img
