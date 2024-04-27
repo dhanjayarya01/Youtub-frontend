@@ -15,7 +15,6 @@ import { MdCancel } from "react-icons/md";
 
   const navigate=useNavigate()
     const handleSubmit = async () => {
-      console.log("email",email)
         const userdata={
           email:email,
           password:password
@@ -23,8 +22,7 @@ import { MdCancel } from "react-icons/md";
     
       try {
         const response = await apiContext.loginUser(userdata)
-        console.log('User Login successfully:', response);
-        console.log("currentroutename",currentroutename)
+        
         navigate(`/${currentroutename}`)
         setIsLoggedIn(true)
         const data= await apiContext.getCurrentUser()

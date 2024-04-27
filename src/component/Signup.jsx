@@ -66,7 +66,6 @@ function Signup() {
   };
  
 const handlecancel=()=>{
-  console.log("clicked")
   setIsHomepage(true)
   navigate('/')
 }

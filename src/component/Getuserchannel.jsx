@@ -80,8 +80,8 @@ function Getuserchannel({ channelname }) {
         </div>
 
         <div className='w-full flex h-[38%]'>
-          <div className='w-[20%] h-full p-3'>
-            <img className='rounded-full border-[0.1rem] border-zinc-950 overflow-visible h-full' src={channeldata?.avatar} alt="" />
+          <div className='w-[19%] h-full  p-3'>
+            <img className='rounded-full border-[0.01rem]  border-zinc-950 ' src={channeldata?.avatar} alt="" />
           </div>
           <div className='w-[80%] h-full pt-5'>
             <div className='w-full h-[31%] text-5xl font-medium'>{channeldata?.fullName}</div>

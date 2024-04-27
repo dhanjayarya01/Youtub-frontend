@@ -20,7 +20,6 @@ function Home() {
 
     useEffect(() => {
         loadInitialVideos();
-        console.log(isLoggedIn)
         setSignupopen(isLoggedIn)
 
     }, []);

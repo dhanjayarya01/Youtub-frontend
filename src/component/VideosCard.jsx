@@ -28,7 +28,6 @@ function VideosCard({
     const handleClick=()=>{
         navigate(`/v/${videoId}`)
         setCurrentroutename('')
-        console.log("videosCard",currentroutename)
     }
 
     

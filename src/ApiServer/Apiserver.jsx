@@ -45,7 +45,7 @@ class ApiService {
 
   async changeCurrentPassword(passwordData) {
     try {
-      const response = await this.axiosInstance.patch('/users/change-password', passwordData);
+      const response = await this.axiosInstance.post('/users/change-password', passwordData);
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -54,7 +54,7 @@ class ApiService {
 
   async updateAccountDetails(accountDetails) {
     try {
-      const response = await this.axiosInstance.patch('/users/update-details', accountDetails);
+      const response = await this.axiosInstance.patch('/users/update-account', accountDetails);
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -72,10 +72,8 @@ class ApiService {
 
   async updateUserAvatar(avatarData) {
     try {
-      const config = {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      };
-      const response = await this.axiosInstance.patch('/users/update-avatar', avatarData, config);
+    
+      const response = await this.axiosInstance.patch('/users/avatar', avatarData);
       return response.data;
     } catch (error) {
       throw error.response.data;
@@ -84,10 +82,7 @@ class ApiService {
 
   async updateUserCoverImage(coverImageData) {
     try {
-      const config = {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      };
-      const response = await this.axiosInstance.patch('/users/update-cover', coverImageData, config);
+      const response = await this.axiosInstance.patch('/users/coverImage', coverImageData);
       return response.data;
     } catch (error) {
       throw error.response.data;
