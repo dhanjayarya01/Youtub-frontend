@@ -3,7 +3,7 @@ import axios from 'axios';
 class ApiService {
   constructor() {
     this.axiosInstance = axios.create({
-      baseURL: '/api/v1'
+      baseURL: 'http://localhost:3000/api/v1'
     });
   }
 
