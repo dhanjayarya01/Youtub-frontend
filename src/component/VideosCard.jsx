@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { formatDuration, timeAgo } from "../helpers/timeAgo";
 import { useNavigate } from "react-router-dom";
 import { useLocation } from "react-router-dom";
@@ -16,7 +16,7 @@ function VideosCard({
     videoId,
 }) {
 
-    const {setCurrentroutename,currentroutename}=useContext(ApiContext)
+    const {setCurrentroutename,currentroutename,setIsLoggedIn}=useContext(ApiContext)
     const location =useLocation();
     const navigate = useNavigate();
 
@@ -27,8 +27,12 @@ function VideosCard({
   
     const handleClick=()=>{
         navigate(`/v/${videoId}`)
-        setCurrentroutename('')
+        setCurrentroutename('') 
     }
+    // console.log(location)
+    // useEffect(()=>{
+    //     handleClick()
+    // },[videoId])
 
     
     return (

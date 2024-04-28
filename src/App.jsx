@@ -17,12 +17,13 @@ import ChannelVideo from './page/channel/ChannelVideo';
 import AuthLayout from './Route/AuthLayout';
 
 function App() {
- const { apiContext, currentuserinfo, setCurrentuserinfo, isLoggedIn, setIsLoggedIn } = useContext(ApiContext);
+ const { apiContext, setCurrentuserinfo, isLoggedIn, setIsLoggedIn } = useContext(ApiContext);
 
+ console.log(isLoggedIn)
  const getCurrentUser = async () => {
    const user = await apiContext.getCurrentUser();
-   setCurrentuserinfo(user.data);
    setIsLoggedIn(true);
+   setCurrentuserinfo(user.data);
  }
 
  useEffect(() => {

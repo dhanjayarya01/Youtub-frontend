@@ -8,9 +8,13 @@ import ApiContext from '../ApiServer/ApiContext';
 import InfiniteScroll from './InfiniteScroll'; // Import the InfiniteScroll component
 import { timeAgo } from '../helpers/timeAgo';
 import SkeletonComment from '../skeleton/VideodetailSkeleton';
-
+import { useNavigate } from 'react-router-dom';
+import { CiBellOn } from "react-icons/ci";
 
 function VideoDetail({ videodetail }) {
+
+      const navigate=useNavigate()
+
     const { apiContext } = useContext(ApiContext);
     const [comments, setComments] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -21,22 +25,33 @@ function VideoDetail({ videodetail }) {
     const {currentuserinfo}=useContext(ApiContext)
     const [isCommetLiked,setIsCommentLiked]=useState(false)
     
-    const [likecount,setLikecount]=useState(0)
-    const [subcount,setSubcount]=useState('')
-    const [isUsersubs,setIsUsersubs]=useState(false);
-    
+    const [likecount,setLikecount]=useState('0')
+    const [isvideoLiked,setIsvideoLiked]=useState(false)
+    const [subcount,setSubcount]=useState('0')
+    const [isSubscribed,setIsSubscribed]=useState(false);
 
     
-        const getusersubcount=async()=>{
-           const subdata= await apiContext.getUserChannelSubscribers(videodetail?.owner?._id);
-            // setSubcount(subdata?.data[0]?.subscriber?.subscribersCount )
-        
-             console.log("hi",subdata)
+    
+        const getInitialCounts=async()=>{
+           setSubcount(videodetail?.owner?.subscribercount)
+           setIsSubscribed(videodetail?.owner?.isSubscribed)
+           setLikecount(videodetail?.likecount)
+           setIsvideoLiked(videodetail?.isLiked)
         }
     useEffect(()=>{
-        getusersubcount();
-    },[])
-   
+        getInitialCounts();
+    },[videodetail])
+    
+    const handleSubscribe = async () => {
+        try {
+            setSubcount(prev => isSubscribed ? prev - 1 : prev + 1);
+            setIsSubscribed(!isSubscribed)
+    
+            await apiContext.toggleSubscription(videodetail?.owner._id);
+        } catch (error) {
+            console.error('Error subscribing to user:', error);
+        }
+    };
     
     const loadInitialComments = async () => {
         const initialData = await fetchComments(currentPage);
@@ -50,6 +65,7 @@ function VideoDetail({ videodetail }) {
     const fetchComments = async (page) => {
         try {
             const response = await apiContext.getVideoComments(videodetail?._id);
+            
             return response.data;
         } catch (error) {
             console.error('Error fetching comments:', error);
@@ -72,29 +88,15 @@ function VideoDetail({ videodetail }) {
         await apiContext.addComment(videodetail._id,usercomment)
     }
   
-    // console.log(videodetail?.owner?.subscribercount)
-    // console.log(videodetail)
     
-
-    const handleSubscribe = async () => {
-        try {
-             if(!isUsersubs){
-             setSubcount((prev)=>prev + 1)
-             }
-             else{ setSubcount((prev)=>prev - 1)
-             }
-             setIsUsersubs(!isUsersubs)
-            await apiContext.toggleSubscription(videodetail?.owner._id);
-        } catch (error) {
-            console.error('Error subscribing to user:', error);
-        }
-    };
-
 
     const handleLikeVideo = async () => {
         try {
-            
-           await apiContext.toggleVideoLike(videodetail._id);
+            setLikecount(prev=> isvideoLiked ? prev -1 :prev +1)
+             setIsvideoLiked(!isvideoLiked)
+          const res= await apiContext.toggleVideoLike(videodetail._id);
+
+          console.log("like",res)
            
         } catch (error) {
             console.error('Error liking video:', error);
@@ -124,24 +126,31 @@ function VideoDetail({ videodetail }) {
        setUsercomment('')
        setIscommentopen(false)
     }
+
+    const handleavatarclick=()=>{
+        navigate(`/channel/${videodetail?.owner?.username}`);
+    }
    
     return (
         <div className='w-full flex-grow h-[100%]'>
             <div className='title flex-wrap overflow-clip h-[4rem] ml-1 mt-2 w-[59%] flex justify-start items-center text-2xl font-bold'>{videodetail.title}</div>
             
-            <div className='userdetails m-[1%] -800 ml-0 h-[4rem] w-[60%] p-1 flex justify-start items-center'>
-                <div className='avatar w-12 h-12 rounded-full border-zinc-400 border-[0.01rem] overflow-hidden'>
+            <div className='userdetails  m-[1%] -800 ml-0 h-[4rem] w-[100%] p-1 flex justify-start items-center'>
+                <button onClick={handleavatarclick} className='avatar   w-12 h-12 rounded-full border-zinc-400 border-[0.01rem] overflow-hidden'>
                     {videodetail?.owner?.avatar ? <img className='object-contain' src={videodetail?.owner?.avatar} alt=".." /> : null}
-                </div>
+                </button>
                 <div className='m-[2%] h-[90%] w-[25%]'>
                     <div className='font-bold text-xl h-[40%]'>{videodetail?.owner?.username}</div>
                     <div className='mt-[2%]'>{`${subcount }  subscribers`}</div>
                 </div>
-                <button onClick={handleSubscribe} className='active:bg-red-500 h-[80%] w-[17%] font-bold text-base  rounded-3xl bg-black text-white'>Subscribe</button>
-                <div className='likediv ml-[10%] flex m-[3%]  w-[24%] h-[80%] rounded-3xl bg-[#ECECEC]'>
+                <button onClick={handleSubscribe} className={`${isSubscribed ?'w-[22%]': 'w-[16%]'} active:animate-ping duration-[1.3s] justify-center items-center flex   h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]`}>
+                 {isSubscribed && <div className='w-[20%] h-full text-3xl flex items-center ml-[-2rem] '><CiBellOn/></div>}
+              <div className='h-full flex items-center  ml-1'>{isSubscribed ?'Subscribed':'Subscribe' }</div></button>
+
+                              <div className='likediv ml-[10%] flex m-[3%]  w-[24%] h-[80%] rounded-3xl bg-[#ECECEC]'>
                     <div className='h-full  flex pl-[12%] items-center rounded-3xl w-[65%] text-3xl'>
                        <button className='active:text-red-400'  onClick={handleLikeVideo}> <AiOutlineLike /></button>
-                        <div className='font-light items-center w-[60%] overflow-clip ml-[4%] '>{videodetail.likecount}</div>
+                        <div className='font-light items-center w-[60%] overflow-clip ml-[4%] '>{likecount}</div>
                     </div>
                     <div className='h-full flex items-center justify-center w-[34%] text-3xl border-l-black border-l-[0.01rem]  rounded-r-3xl '>
                         <button className='active:text-red-400'><BiDislike /></button>
@@ -153,7 +162,7 @@ function VideoDetail({ videodetail }) {
                 </div>
             </div>
             
-             <div className='viewandDes  w-[60%] min-h-[19%] rounded-xl pl-2 bg-[#ECECEC]'>
+             <div className='viewandDes  w-[100%] min-h-[19%] rounded-xl pl-2 bg-[#ECECEC]'>
                 <div className='viewandtime flex text-lg font-medium h-[40%] w-[100%] items-center'>{`${videodetail?.views} views`}
                    <div className='ml-3'>{timeAgo(videodetail.createdAt)}</div>
                 </div>
@@ -161,12 +170,12 @@ function VideoDetail({ videodetail }) {
                   <div className='des w-[100%]'>{videodetail.description}</div> 
              </div>
             
-            <div className='commentdiv  w-[60%] h-full'>
+            <div className='commentdiv  w-[100%] h-full'>
                 <div className='commetlen w-full ml-[2%] h-[6%]  text-xl font-semibold mt-[2%]'>{`${comments.length} Comments`}</div>
                  
                  <div className='sendcomment  flex mt-[3%] items-start    h-[17%] w-full'>
                     
-                    <div className="avatardiv h-[50%] mt-3 flex items-center rounded-[4rem]  w-[3rem] bg-slate-100">
+                    <div className="avatardiv h-[50%] mt-3 flex items-center rounded-[4rem]   w-[3rem] bg-slate-100">
                         <img src={currentuserinfo?.avatar} alt=".." />
                      </div>
 
@@ -186,8 +195,8 @@ function VideoDetail({ videodetail }) {
                     :
                          comments.map((comment) => (
                         <div key={comment._id} className="comment  w-full  flex  p-2 mt-2 rounded-md">
-                            <div className='avatar w-[3rem] h-[3rem] border-[0.01rem] border-black  rounded-full  mr-4'>
-                                <img src={comment.owner.avatar || 'default_avatar.png'} alt="User avatar" className="object-contain w-[full] h-full" />
+                            <div className='avatar w-[3rem] overflow-clip h-[3rem] border-[0.01rem] border-black  rounded-full  mr-4'>
+                                <img src={comment.owner.avatar || 'default_avatar.png'} alt="User avatar" className="object-cover w-[full] h-full" />
                             </div>
                               
                               <div className='w-[40rem] justify-end h-[100%]  '>
