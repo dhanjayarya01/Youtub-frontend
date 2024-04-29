@@ -3,7 +3,7 @@ import axios from 'axios';
 class ApiService {
   constructor() {
     this.axiosInstance = axios.create({
-      baseURL: 'https://backendproject-sd57.onrender.com/api/v1'
+      baseURL: 'https://backendproject-sd57.onrender.com'
     });
   }
 
