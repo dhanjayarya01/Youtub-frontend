@@ -3,7 +3,7 @@ import axios from 'axios';
 class ApiService {
   constructor() {
     this.axiosInstance = axios.create({
-      baseURL: 'http://localhost:3000/api/v1'
+      baseURL: 'https://backendproject-sd57.onrender.com'
     });
   }
 
@@ -108,6 +108,7 @@ class ApiService {
   }
 
   async getAllVideos(params) {
+
     try {
       const response = await this.axiosInstance.get('/videos', { params });
       return response.data;
