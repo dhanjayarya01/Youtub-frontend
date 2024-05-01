@@ -16,9 +16,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     
     <App/>
     <ToastContainer
-position="top-rightx"
-autoClose={3000}
-hideProgressBar={false}
+position="top-right"
+autoClose={2000}
+hideProgressBar={true}
 newestOnTop={true}
 closeOnClick
 rtl={false}
@@ -26,7 +26,7 @@ pauseOnFocusLoss
 draggable
 pauseOnHover
 theme="light"
-transition={Bounce}
+
 />
 
     </ApiProvider>

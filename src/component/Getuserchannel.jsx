@@ -29,7 +29,7 @@ function Getuserchannel({ channelname }) {
 
     useEffect(()=>{
 
-      if(channelname==channeldata?.username){
+      if(currentuserinfo?.username==channeldata?.username){
         setSameUser(true)
       }
     })
@@ -57,7 +57,7 @@ function Getuserchannel({ channelname }) {
     isloading ? <ChannelSkeleton /> : (
 
       
-      <div className='w-full p-14 pb-0 pt-0 bg h-{100%}'>
+      <div className='w-[75rem] p-14 pb-0 pt-0 bg h-{100%}'>
         { uploadVideoOpen&& <div className='absolute z-50 left-[14%] right-[14%] top-2 bottom-2 bg-white rounded-2xl border-2'>
           <Uploadvideo setUploadVideoOpen={setUploadVideoOpen}/>
           

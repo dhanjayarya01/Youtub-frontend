@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useContext } from 'react'
 import ApiContext from '../ApiServer/ApiContext'
 import { MdCancel } from "react-icons/md";
+import { toast } from 'react-toastify'
 
 
  function Login() {
@@ -22,7 +23,7 @@ import { MdCancel } from "react-icons/md";
     
       try {
         const response = await apiContext.loginUser(userdata)
-        
+        toast(response.message)
         navigate(`/${currentroutename}`)
         setIsLoggedIn(true)
         const data= await apiContext.getCurrentUser()

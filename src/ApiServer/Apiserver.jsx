@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 class ApiService {
   constructor() {
@@ -12,7 +13,18 @@ class ApiService {
       const response = await this.axiosInstance.post('/users/register', userData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -21,7 +33,18 @@ class ApiService {
       const response = await this.axiosInstance.post('/users/login', userData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -30,7 +53,18 @@ class ApiService {
       const response = await this.axiosInstance.post('/users/logout');
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -39,7 +73,18 @@ class ApiService {
       const response = await this.axiosInstance.post('/refresh-token', refreshTokenData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -48,7 +93,18 @@ class ApiService {
       const response = await this.axiosInstance.post('/users/change-password', passwordData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -57,7 +113,18 @@ class ApiService {
       const response = await this.axiosInstance.patch('/users/update-account', accountDetails);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -66,7 +133,18 @@ class ApiService {
       const response = await this.axiosInstance.get('/users/current-user');
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -76,7 +154,18 @@ class ApiService {
       const response = await this.axiosInstance.patch('/users/avatar', avatarData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -85,7 +174,18 @@ class ApiService {
       const response = await this.axiosInstance.patch('/users/coverImage', coverImageData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -94,7 +194,18 @@ class ApiService {
       const response = await this.axiosInstance.get(`/users/c/${username}`);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -103,7 +214,18 @@ class ApiService {
       const response = await this.axiosInstance.get('/users/history');
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -113,7 +235,18 @@ class ApiService {
       const response = await this.axiosInstance.get('/videos', { params });
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -122,7 +255,18 @@ class ApiService {
       const response = await this.axiosInstance.post('/videos', videoData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -131,7 +275,18 @@ class ApiService {
       const response = await this.axiosInstance.get(`/videos/v/${videoId}`);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -140,7 +295,18 @@ class ApiService {
       const response = await this.axiosInstance.patch(`/videos/v/${videoId}`, videoData);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -149,7 +315,18 @@ class ApiService {
       const response = await this.axiosInstance.delete(`/videos/v/${videoId}`);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -158,7 +335,18 @@ class ApiService {
       const response = await this.axiosInstance.patch(`/videos/toggle/publish/${videoId}`);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -205,7 +393,18 @@ class ApiService {
       const response = await this.axiosInstance.post(`/likes/toggle/v/${videoId}`);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -214,7 +413,18 @@ class ApiService {
       const response = await this.axiosInstance.post(`/likes/toggle/c/${commentId}`);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -223,7 +433,18 @@ class ApiService {
       const response = await this.axiosInstance.post(`/tweets/${tweetId}/like`);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
@@ -232,7 +453,18 @@ class ApiService {
       const response = await this.axiosInstance.get(`/likes/videos`);
       return response.data;
     } catch (error) {
-      throw error.response.data;
+        const errorMessage = error.response.data;
+        const pattern = /<pre>(.*?)<\/pre>/s;
+        const match = errorMessage.match(pattern);
+        if (match && match[1]) {
+            const brIndex = match[1].indexOf('<br>');
+            const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
+            console.log("api error", errorText);
+            toast.error(errorText)
+            throw errorMessage
+        } else {
+            throw errorMessage;
+        }
     }
   }
 
