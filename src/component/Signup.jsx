@@ -7,6 +7,7 @@ import { useContext } from 'react'
 import { Link } from 'react-router-dom'
 import { MdCancel } from "react-icons/md";
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify'
 
 function Signup() {
   const navigate = useNavigate(); 
@@ -18,6 +19,7 @@ function Signup() {
   const[password,setPassword]=useState("")
   const [avatar, setAvatar] = useState(null);
   const [coverImagefile, setCoverImagefile] = useState(null);
+  const [error,setError]=useState()
 
   
   const avatarfileInputRef = useRef(null);
@@ -40,29 +42,80 @@ function Signup() {
   };
 
 
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
 
   const handleSubmit = async () => {
+    setError('')
+console.log("d")
+if (
+  username.length < 1 ||
+  email.length < 1 ||
+  password.length < 1 ||
+  fullName.length < 1
+) {
+  
+      setError('All fields are required');
+    } else if (!validateEmail(email)) {
+      setError('Please enter a valid email address');
     
+    } else if (!validatePassword(password)) {
+      setError('Password must be at least 8 characters long');
+    } 
+    
+    else{
+
     const formData = new FormData();
     formData.append('username', username);
     formData.append('fullName', fullName);
     formData.append('email', email);
     formData.append('password', password);
   
-    if (avatar) {
+    if (!avatar) {
+      setError('Avatar is required');
+      toast('Avatar is Required')
+      return; 
+    } else {
       formData.append('avatar', avatar);
     }
-  
-    if (coverImagefile) {
+    
+    if (!coverImagefile) {
+      setError('CoverImage is required');
+      toast('CoverImage is Required')
+      return; 
+    } else {
       formData.append('coverImage', coverImagefile);
     }
   
     try {
+      const loadingtoast=toast.loading('please wait...')
       const response = await apiContext.registerUser(formData); 
-      console.log('User registered successfully:', response);
+      toast.dismiss(loadingtoast)
+      setError('')
+      toast.success(response.message);
+      console.log(email,password)
+      const userdata={
+        email:email,
+        password:password
+      }
+      await apiContext.loginUser(userdata)
+      navigate('/')
     } catch (error) {
+      toast.dismiss(loadingtoast)
+
       console.error('Registration error:', error);
     }
+  }
+
+  if(error){
+    toast(error)
+  }
   };
  
 const handlecancel=()=>{

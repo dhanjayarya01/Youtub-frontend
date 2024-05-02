@@ -4,6 +4,7 @@ import ChannelSkeleton from '../skeleton/ChannelSkeleton';
 import { MdCancel } from "react-icons/md";
 import camera from"/image/camera.png"
 import { FaEye } from "react-icons/fa";
+import { toast } from 'react-toastify';
 
 
 export default function Myprofile() {
@@ -23,16 +24,20 @@ export default function Myprofile() {
  const [avatarUrl,setAvatarUrl]=useState('')
 
 
- const UpdateDetails=async()=>{
 
-   console.log("enter")
+ const UpdateDetails=async()=>{
+  
+   const loadingtoast=toast.loading('Updating Details ....')
    
+  if(!(newEmail || newFullName || newPassword || newUserName || coverImage || avatar)){
+    toast.dismiss(loadingtoast)
+  }
    if(avatar){
     const formData = new FormData();
     formData.append('avatar', avatar);
     
     setAvatar('')
-     await apiContext.updateUserAvatar(formData)
+    await apiContext.updateUserAvatar(formData)
     
     
   }
@@ -42,6 +47,7 @@ export default function Myprofile() {
     formData.append('coverImage', coverImage);
      setCoverImage('')
     await apiContext.updateUserCoverImage(formData)
+
     }
 
     if(newFullName || newEmail || newUserName){
@@ -51,19 +57,31 @@ export default function Myprofile() {
         username:newUserName || currentuserinfo.username
        }
        const res=await apiContext.updateAccountDetails(userdata)
-       console.log(res)
     }
 
     if(newPassword && oldPassword ){
-      console.log("newpa",newPassword ,oldPassword)
 
        const password={
          oldPassword:oldPassword,
         newPassword:newPassword,
        }
-      const res=await apiContext.changeCurrentPassword(password)
-      console.log(res)
+      await apiContext.changeCurrentPassword(password)
+    
     }
+
+
+    toast.dismiss(loadingtoast)
+     setAvatar('')
+     setCoverImage('')
+     setNewEmail ('')
+     setNewPassword ('')
+     setNewUserName('')
+     setNewFullName('')
+     setIsUPloadOpen(false)
+    if(newEmail || newFullName || newPassword || newUserName || coverImage || avatar){
+      toast.success("User Details Updated successfully")
+    }
+    
  }
 
   const getCurrentUser=()=>{

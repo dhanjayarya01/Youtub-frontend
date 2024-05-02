@@ -140,7 +140,6 @@ class ApiService {
             const brIndex = match[1].indexOf('<br>');
             const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
             console.log("api error", errorText);
-            toast.error(errorText)
             throw errorMessage
         } else {
             throw errorMessage;
@@ -201,7 +200,6 @@ class ApiService {
             const brIndex = match[1].indexOf('<br>');
             const errorText = brIndex !== -1 ? match[1].substring(0, brIndex) : match[1];
             console.log("api error", errorText);
-            toast.error(errorText)
             throw errorMessage
         } else {
             throw errorMessage;

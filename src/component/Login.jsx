@@ -11,25 +11,66 @@ import { toast } from 'react-toastify'
  function Login() {
   const[email,setEmail]=useState("")
   const[password,setPassword]=useState("")
+  const [error,setError]=useState("")
   const {apiContext,setIsLoggedIn,currentroutename,setIsHomepage}=useContext(ApiContext)
 
 
   const navigate=useNavigate()
+
+  const validateEmail = (email) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password) => {
+    return password.length >= 8;
+  };
+
     const handleSubmit = async () => {
+      
+
+      if (
+        email.length < 1 ||
+        password.length < 1 
+      ) {
+           console.log("ijij")
+            setError('All fields are required');
+
+          } else if (!validateEmail(email)) {
+            setError('Please enter a valid email address');
+          
+          } else if (!validatePassword(password)) {
+            
+            setError('Password must be at least 8 characters long');
+          } 
+          
+          else{ 
         const userdata={
           email:email,
           password:password
         }
     
-      try {
+        const loadingtoast=toast.loading('please wait ...')
+        try {
+          setError('')
         const response = await apiContext.loginUser(userdata)
-        toast(response.message)
+        setError('')
+        toast.dismiss(loadingtoast)
+        toast.success(response.message)
         navigate(`/${currentroutename}`)
         setIsLoggedIn(true)
         const data= await apiContext.getCurrentUser()
       
       } catch (error) {
+        toast.dismiss(loadingtoast)
         console.error('login error:', error);
+      }
+
+
+    }
+      console.log("fjdsjlkf",error)
+      if(error){
+        toast.error(error)
       }
     };
 

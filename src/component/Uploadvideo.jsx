@@ -19,7 +19,18 @@ function Uploadvideo({setUploadVideoOpen}) {
   const [fileUrl, setFileUrl] = useState('');
 
   const handleupload=async()=>{
-    toast.error("nio")
+   
+
+    if(!videofile){
+      toast.error('videoFile is required')
+      
+    }
+    else if(!thumbnail){
+      toast.error('Video Thumbnail  is required')
+
+    }
+    else{
+      const loadingtoast=toast.loading('Uploading Your Video ...')
     const formData = new FormData();
     formData.append('title', title);
     formData.append('description', description);
@@ -27,9 +38,11 @@ function Uploadvideo({setUploadVideoOpen}) {
     formData.append('videoFile', videofile);
 
 
-    const res= await apiContext.publishAVideo(formData)
+    await apiContext.publishAVideo(formData)
+    toast.dismiss(loadingtoast)
+    toast.success("Uploaded Your Video")
 
-    console.log(res)
+    }
 
   }
 
