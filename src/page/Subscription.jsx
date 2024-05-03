@@ -7,7 +7,7 @@ import { useScroll } from 'framer-motion'
 function Subscription() {
 
 
-  const [channels,setchannels]=useState()
+  const [channels,setchannels]=useState([])
   const {apiContext}=useContext(ApiContext)
 
 
@@ -15,7 +15,6 @@ function Subscription() {
 
   const getchannel=async()=>{
    const ress=await apiContext.getSubscribedChannels(channelId)
-    console.log("sus",ress)
     setchannels(ress.data)
 
   }
@@ -26,7 +25,7 @@ function Subscription() {
   })
   return (
     <div className='h-full w-full '>
-     
+     { !(channels.length)?<div className='h-[12%] text-3xl flex justify-center   mt-2'>You Have Not Subscribed To Any Channels</div>: <div>
      {
       channels?.map((channel)=>(
         <div className='h-[20%] rounded-2xl mt-6 p-3 pt-0 pb-0 w-[50%] flex bg-slate-100'>
@@ -42,6 +41,7 @@ function Subscription() {
       ))
 
      }
+     </div>}
     </div>
   )
 }
