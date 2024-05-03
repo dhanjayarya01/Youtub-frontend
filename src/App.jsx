@@ -18,7 +18,7 @@ import AuthLayout from './Route/AuthLayout';
 import Playlist from './page/Playlist';
 import About from './page/About';
 import Subscription from './page/Subscription';
-
+import DeviceWarning from './helpers/DeviceWarning';
 function App() {
  const { apiContext, setCurrentuserinfo, isLoggedIn, setIsLoggedIn } = useContext(ApiContext);
 
@@ -34,6 +34,7 @@ function App() {
 
  return (
    <Router>
+    <DeviceWarning />
      <Sidebar>
        <Routes>
          <Route path="/" element={<Home />} />
