@@ -7,7 +7,7 @@ function Yourchannel() {
 
   return (
 
-    <div className='w-[75rem] '>
+    <div className='w-[100%] '>
     <Getuserchannel channelname={currentuserinfo.username}/>
     <Outlet/>
     </div>

@@ -6,6 +6,7 @@ import camera from"/image/camera.png"
 import { FaEye } from "react-icons/fa";
 import { toast } from 'react-toastify';
 
+import { FaRegEdit } from "react-icons/fa";
 
 export default function Myprofile() {
 
@@ -128,14 +129,22 @@ export default function Myprofile() {
 
     return (
       isloading ? ( <ChannelSkeleton/>): (
-      <div className='w-[75rem] p-14 pb-0 pt-0 bg h-{100%}'>
+      <div className='w-[100%] p-14 pb-0 pt-0 bg h-{100%}'>
           
             <button  onClick={toggleUpload} className={`bg-[#ECECEC] text-xl  active:translate-x-2 duration-[0.8s]  active:bg-slate-400   rounded-3xl mt-2 h-[10%] absolute right-[5%] flex justify-center items-center ${isUploadOpen?' w-[16%]' :' w-[14%]'}`}>
               {isUploadOpen ?  
-              <div className=' flex items-center justify-between '>
-                <div className='text-3xl  text-red-400'><MdCancel/></div>
-                  <span className='ml-1'>Cancel Upload</span>
-                 </div>:'Update Details' }
+              <div className='  flex items-center justify-between '>
+                <div className='text-3xl sm:text-[0rem]  text-red-400'><MdCancel/></div>
+                  <span className='ml-1 flex sm:w-[100%]  overflow-clip w-0'>Cancel Upload</span>
+                 </div>:
+                 
+                 <div className='flex justify-center items-center'>
+                  <div className='text-3xl sm:w-0 sm:text-[0rem]  text-red-400'>
+                    <FaRegEdit/>
+                  </div>
+                  <div className='sm:w-[100%]  overflow-clip w-0'>Update Details</div>
+                  </div>
+                 }
 
 
                 </button>
@@ -164,7 +173,7 @@ export default function Myprofile() {
 
           <div className='w-full flex h-[38%]'>
 
-            <div className='w-[20%] h-full p-3'>
+            <div className='sm:w-[20%] h-[72%] w-[52%] sm:h-[100%] p-3'>
               <div  style={{
                 overflow:'visible',
                 backgroundImage: avatarUrl ?`url(${avatarUrl})`: `url(${currentuserinfo?.avatar})`,
@@ -175,27 +184,27 @@ export default function Myprofile() {
               > {isUploadOpen && <button onClick={Thumbnailclick}  className=' w-[40%]  z-50 text-red-400 h-[40%]'><img  src="/image/camera.png" alt="" /></button>}
                <input  className='h-0 w-0' type='file' accept='image/*' ref={avatarRef} onChange={handleavatar} style={{visibility:'hidden'}}/>
               </div>
-              {isUploadOpen && <button onClick={UpdateDetails} className={`bg-[#ECECEC]  text-xl w-[90%] h-[30%] active:animate-pulse duration-[0.8s]  active:bg-slate-400   rounded-3xl mt-5  flex justify-center items-center w-[16%]'}`}>Update Change</button>}
+              {isUploadOpen && <button onClick={UpdateDetails} className={`bg-[#ECECEC]  text-xs sm:text-xl w-[90%] h-[30%] active:animate-pulse duration-[0.8s]  active:bg-slate-400   rounded-3xl mt-5  flex justify-center items-center w-[16%]'}`}>Update Change</button>}
             </div>
 
 
             <div className='w-[80%]  h-full pt-5 '>
 
-              <div className='h-[15rem]  hover:border-[0.01rem] overflow-scroll no-scrollbar  '>
+              <div className='h-[15rem]   hover:border-[0.01rem] overflow-scroll no-scrollbar  '>
                   <span >FullName</span>
-              <input placeholder={isUploadOpen ? `Ex-${currentuserinfo.fullName}`: currentuserinfo.fullName} readOnly={isUploadOpen?0:1}  onChange={(e)=>setNewFullName(e.target.value)} type="text" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2 text-lg ': null} w-[50%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]  text-4xl font-medium text-red`}/>
+              <input placeholder={isUploadOpen ? `Ex-${currentuserinfo.fullName}`: currentuserinfo.fullName} readOnly={isUploadOpen?0:1}  onChange={(e)=>setNewFullName(e.target.value)} type="text" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2 text-lg ': null} w-full sm:w-[50%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]   text-sm sm:text-4xl font-medium text-red`}/>
               
                   <span >UserName</span>
-              <input placeholder={isUploadOpen ? `Ex-${currentuserinfo.username}`: currentuserinfo.username} readOnly={isUploadOpen?0:1} onChange={(e)=>setNewUserName(e.target.value)}  type="text" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2 text-lg ': null} w-[50%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]  text-4xl font-medium text-red`}/>
+              <input placeholder={isUploadOpen ? `Ex-${currentuserinfo.username}`: currentuserinfo.username} readOnly={isUploadOpen?0:1} onChange={(e)=>setNewUserName(e.target.value)}  type="text" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2 text-lg ': null} w-full sm:w-[50%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]   text-sm sm:text-4xl font-medium text-red`}/>
               
                 <span >Email</span>
-              <input placeholder={isUploadOpen ? `Ex-${currentuserinfo.email}`: currentuserinfo.email} readOnly={isUploadOpen?0:1} onChange={(e)=>setNewEmail(e.target.value)} type="text" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2 text-lg ': null} w-[56%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]   text-4xl font-medium text-red`}/>
+              <input placeholder={isUploadOpen ? `Ex-${currentuserinfo.email}`: currentuserinfo.email} readOnly={isUploadOpen?0:1} onChange={(e)=>setNewEmail(e.target.value)} type="text" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2 text-lg ': null} w-full sm:w-[56%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]    text-sm sm:text-4xl font-medium text-red`}/>
               
                   <span >Old Password *</span>
-              <input placeholder={"Enter Your Old password"} readOnly={isUploadOpen?0:1} onChange={(e)=>setOldPassword(e.target.value)} type="password" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2 text-lg ': null} w-[50%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]  text-4xl font-medium text-red`}/>
+              <input placeholder={"Enter Your Old password"} readOnly={isUploadOpen?0:1} onChange={(e)=>setOldPassword(e.target.value)} type="password" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2 text-lg ': null} w-full sm:w-[50%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]   text-sm sm:text-4xl font-medium text-red`}/>
               
                 <span >New Password *</span>
-              <input placeholder={`Ex-${currentuserinfo.fullName}123#`} readOnly={isUploadOpen?0:1} onChange={(e)=>setNewPassword(e.target.value)} type="password" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2   text-lg ': null} w-[50%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]  text-4xl font-medium text-red`}/>
+              <input placeholder={`Ex-${currentuserinfo.fullName}123#`} readOnly={isUploadOpen?0:1} onChange={(e)=>setNewPassword(e.target.value)} type="password" className={`${isUploadOpen ?' p-2 focus:border-red-500 hover:caret-red-500 border-2   text-lg ': null} w-full sm:w-[50%] focus:outline-none  flex rounded-xl placeholder-black h-[22%]   text-sm sm:text-4xl font-medium text-red`}/>
                
              
       

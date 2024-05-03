@@ -57,7 +57,7 @@ function Getuserchannel({ channelname }) {
     isloading ? <ChannelSkeleton /> : (
 
       
-      <div className='w-[75rem] p-14 pb-0 pt-0 bg h-{100%}'>
+      <div className='w-[100%] p-14 pb-0 pt-0 bg h-{100%}'>
         { uploadVideoOpen&& <div className='absolute z-50 left-[14%] right-[14%] top-2 bottom-2 bg-white rounded-2xl border-2'>
           <Uploadvideo setUploadVideoOpen={setUploadVideoOpen}/>
           
@@ -79,7 +79,7 @@ function Getuserchannel({ channelname }) {
           ></div>
         </div>
 
-        <div className='w-full flex h-[38%]'>
+        <div className='sm:w-[68rem] w-full flex  h-[38%]'>
           <div className='w-[19%] h-full  p-3'>
             <img className='rounded-full border-[0.01rem]  border-zinc-950 ' src={channeldata?.avatar} alt="" />
           </div>
@@ -91,15 +91,15 @@ function Getuserchannel({ channelname }) {
             </div>
 
               <div className='button  flex'>
-             {!sameUser ? <button onClick={handlesubscription} className={`${isSubscribed ?'w-[18%]': 'w-[16%]'} active:animate-ping duration-[1.3s] justify-center items-center flex   h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]`}>
+             {!sameUser ? <button onClick={handlesubscription} className={`${isSubscribed ?'w-[50%]  sm:w-[18%]': 'w-[16%]'} pl-2 active:animate-ping duration-[1.3s] justify-center items-center flex   h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]`}>
               {isSubscribed && <div className='w-[20%] h-full text-3xl flex items-center ml-[-2rem] '><CiBellOn/></div>}
               <div className='h-full flex items-center  ml-1'>{isSubscribed ?'Subscribed':'Subscribe' }</div></button>:
               
-             <button onClick={toggleupload} className='w-[18%] ml-[2%] h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Upload Video</button>
+             <button onClick={toggleupload} className='sm:w-[18%] w-[44%] ml-[2%] h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Upload Video</button>
               }
 
 
-             <button onClick={() => navigate('/myprofile')} className='w-[18%] ml-[2%] h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Update Details</button>
+             <button onClick={() => navigate('/myprofile')} className='sm:w-[18%] w-[44%] ml-[2%] h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]'>Update Details</button>
              </div>
           
           </div>

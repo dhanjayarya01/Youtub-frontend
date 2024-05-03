@@ -25,9 +25,9 @@ import { toast } from 'react-toastify'
   const validatePassword = (password) => {
     return password.length >= 8;
   };
-
-    const handleSubmit = async () => {
-      
+  
+  const handleSubmit = async () => {
+      setEmail(email.replace(/\s/g, ''));
 
       if (
         email.length < 1 ||
@@ -37,24 +37,24 @@ import { toast } from 'react-toastify'
             setError('All fields are required');
 
           } else if (!validateEmail(email)) {
-            setError('Please enter a valid email address');
+            toast.error('Please enter a valid email address');
           
           } else if (!validatePassword(password)) {
             
-            setError('Password must be at least 8 characters long');
+            toast.error('Password must be at least 8 characters long');
           } 
           
           else{ 
-        const userdata={
+          setError('')
+          const userdata={
           email:email,
           password:password
         }
     
         const loadingtoast=toast.loading('please wait ...')
         try {
-          setError('')
-        const response = await apiContext.loginUser(userdata)
         setError('')
+        const response = await apiContext.loginUser(userdata)
         toast.dismiss(loadingtoast)
         toast.success(response.message)
         navigate(`/${currentroutename}`)
@@ -68,7 +68,7 @@ import { toast } from 'react-toastify'
 
 
     }
-      console.log("fjdsjlkf",error)
+    console.log("ffj",error)
       if(error){
         toast.error(error)
       }
@@ -88,7 +88,7 @@ import { toast } from 'react-toastify'
    
       <div className='outerdiv h-[100%] w-[100%] bg-[#FFFFFF] drop-shadow-lg flex justify-between box-border'>
    
-       <div className='inputouter h-[100%] w-[100%]  p-20 pr-0 pt-4'>
+       <div className='inputouter h-[100%] w-[100%] sm:w-full p-20 pr-0 pt-4'>
         
          <div className='logodiv h-[16%] w-[75%] '> 
            <div className='flex items-center   mb-[2%] '>
@@ -111,12 +111,14 @@ import { toast } from 'react-toastify'
        </div>
       
       {/**/ }
-       <div style={{
-         height:'100%',
-         width:'100%',
-         backgroundImage:`url(${study})`,
-         backgroundSize:"cover"
-       }} className='bg-[#E9EFFF] h-[100%] w-[100%]'></div>
+      <div className='w-0 h-0 sm:w-full sm:h-full'>
+    <div  style={{
+      height:'100%',
+      width:'100%',
+      backgroundImage:`url(${study})`,
+      backgroundSize:"cover"
+    }} className='bg-[#E9EFFF] h-[100%] w-[100%]'></div>
+   </div>
       
       </div>
    

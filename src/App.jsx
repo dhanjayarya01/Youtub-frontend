@@ -19,7 +19,6 @@ import AuthLayout from './Route/AuthLayout';
 function App() {
  const { apiContext, setCurrentuserinfo, isLoggedIn, setIsLoggedIn } = useContext(ApiContext);
 
- console.log(isLoggedIn)
  const getCurrentUser = async () => {
    const user = await apiContext.getCurrentUser();
    setIsLoggedIn(true);

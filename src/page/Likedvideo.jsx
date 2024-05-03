@@ -25,7 +25,7 @@ function Likedvideo({noGrid}) {
     <div className={`text-white   ${noGrid ? '':'mb-20 sm:m-0 max-h-screen w-[74rem] grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1'} `}>
                   {
                     loading?<VideoCardSkeleton/>:
-                    videos.map((video) => (
+                    videos?.map((video) => (
                       <VideosCard
                             key={video.likedVideo._id}
                             avatar={video.likedVideo.ownerDetails?.avatar}

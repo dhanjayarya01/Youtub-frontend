@@ -27,7 +27,13 @@ function Uploadvideo({setUploadVideoOpen}) {
     }
     else if(!thumbnail){
       toast.error('Video Thumbnail  is required')
-
+      
+    }
+    else if(!title){
+      toast.error('Video Title is required')
+    }
+    else if(!description){
+      toast.error('Video Description is required')
     }
     else{
       const loadingtoast=toast.loading('Uploading Your Video ...')
@@ -89,10 +95,10 @@ const handleThumbnail = (e) => {
      <div className='w-full sticky bg-white top-0 z-auto pl-2 pr-2 flex items-center border-b-[0.1rem]  justify-between h-[10%] ' >
       <div className='flex w-[20%] justify-evenly '>
       <button onClick={handleCancel} className='w-[20%] text-[#FF5C40] hover:text-red-400 text-3xl active:animate-ping '><MdCancel/></button>
-      <div className='h-full w-[80%] '>cancel uploading</div>
+      <div className='h-full  sm:text-base text-[0rem] sm:w-full w-[0rem]  '>cancel uploading</div>
       </div>
 
-      <button onClick={handleupload} className='w-[15%] h-[80%] hover:bg-slate-400 active:bg-slate-300   rounded-3xl bg-[#ECECEC]'>upload Video</button>
+      <button onClick={handleupload} className=' w-[30%] sm:w-[15%] h-[80%] hover:bg-slate-400 active:bg-slate-300   rounded-3xl bg-[#ECECEC]'>upload Video</button>
       </div>
 
 
@@ -123,15 +129,15 @@ const handleThumbnail = (e) => {
           <div className='w-[68%] h-full '>
             <div> Video Title *</div>
             <div className='w-full h-[18%] mt-1 rounded-md bg-amber-300'>
-               <input value={title} onChange={(e)=>setTitle(e.target.value)} className='w-full h-full focus:outline-none text-xl rounded-md border-[#F3F3F3] border-[0.1rem] focus:border-slate-700' type="text"  placeholder='tittle'/>
+               <input value={title} onChange={(e)=>setTitle(e.target.value)} className='w-full pl-2 h-full focus:outline-none text-xl rounded-md border-[#F3F3F3] border-[0.1rem] focus:border-slate-700' type="text"  placeholder='Title'/>
             </div>
 
-            <div className='mt-1'>Video Discription *</div>
+            <div className='mt-1'>Video Description *</div>
             <div className='w-full h-[50%] mt-1 '>
             <textarea  
             value={description} onChange={(e)=>setDiscription(e.target.value)}
              className='w-full h-full focus:outline-none text-xl rounded-md border-[#F3F3F3] border-[0.1rem] focus:border-slate-700 resize-none'
-             placeholder='Title' 
+             placeholder='Description' 
              style={{ 
                textAlign: 'left', 
                paddingTop: '0.5rem', 

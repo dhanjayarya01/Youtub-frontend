@@ -143,7 +143,7 @@ function VideoDetail({ videodetail }) {
                     <div className='font-bold text-xl h-[40%]'>{videodetail?.owner?.username}</div>
                     <div className='mt-[2%]'>{`${subcount }  subscribers`}</div>
                 </div>
-                <button onClick={handleSubscribe} className={`${isSubscribed ?'w-[22%]': 'w-[16%]'} active:animate-ping duration-[1.3s] justify-center items-center flex   h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]`}>
+                <button onClick={handleSubscribe} className={`${isSubscribed ?'w-[24%] pl-3 sm:w-[22%]': 'w-[16%]'} text-xs sm:text-base active:animate-ping duration-[1.3s] justify-center items-center flex   h-[3rem] mt-4 rounded-3xl active:bg-slate-400 bg-[#ECECEC]`}>
                  {isSubscribed && <div className='w-[20%] h-full text-3xl flex items-center ml-[-2rem] '><CiBellOn/></div>}
               <div className='h-full flex items-center  ml-1'>{isSubscribed ?'Subscribed':'Subscribe' }</div></button>
 

@@ -19,7 +19,6 @@ function Signup() {
   const[password,setPassword]=useState("")
   const [avatar, setAvatar] = useState(null);
   const [coverImagefile, setCoverImagefile] = useState(null);
-  const [error,setError]=useState()
 
   
   const avatarfileInputRef = useRef(null);
@@ -52,8 +51,9 @@ function Signup() {
   };
 
   const handleSubmit = async () => {
-    setError('')
-console.log("d")
+
+     setEmail(email.replace(/\s/g, ''));
+
 if (
   username.length < 1 ||
   email.length < 1 ||
@@ -61,12 +61,12 @@ if (
   fullName.length < 1
 ) {
   
-      setError('All fields are required');
+      toast.error('All fields are required');
     } else if (!validateEmail(email)) {
-      setError('Please enter a valid email address');
+      toast.error('Please enter a valid email address');
     
     } else if (!validatePassword(password)) {
-      setError('Password must be at least 8 characters long');
+      toast.error('Password must be at least 8 characters long');
     } 
     
     else{
@@ -78,16 +78,14 @@ if (
     formData.append('password', password);
   
     if (!avatar) {
-      setError('Avatar is required');
-      toast('Avatar is Required')
+      toast.error('Avatar is required');
       return; 
     } else {
       formData.append('avatar', avatar);
     }
     
     if (!coverImagefile) {
-      setError('CoverImage is required');
-      toast('CoverImage is Required')
+      toast.error('CoverImage is Required')
       return; 
     } else {
       formData.append('coverImage', coverImagefile);
@@ -97,7 +95,6 @@ if (
       const loadingtoast=toast.loading('please wait...')
       const response = await apiContext.registerUser(formData); 
       toast.dismiss(loadingtoast)
-      setError('')
       toast.success(response.message);
       console.log(email,password)
       const userdata={
@@ -113,9 +110,7 @@ if (
     }
   }
 
-  if(error){
-    toast(error)
-  }
+ 
   };
  
 const handlecancel=()=>{
@@ -131,7 +126,7 @@ const handlecancel=()=>{
 
 
    <div className='outerdiv h-[100%] w-[100%]    drop-shadow-sm  flex justify-between box-border'>
-    <div className='inputouter h-[100%] w-[50%]  p-20 pr-0 pt-4'>
+    <div className='inputouter h-[100%] sm:w-[50%] w-full  p-20 pr-0 pt-4'>
      
       <div className='logodiv h-[16%]  w-[90%]  '> 
         <div className='flex items-center   mb-[2%] '>
@@ -163,7 +158,7 @@ const handlecancel=()=>{
         </div>
 
          
-         <div className='flex mt-[4%] ml-[23%]'>
+         <div className='flex  mt-[4%] ml-[23%]'>
             <p>Already have an account </p>
             <Link to="/login" className='ml-[3%] text-[#FF5C40]'>Login</Link>
          </div>
@@ -171,13 +166,14 @@ const handlecancel=()=>{
     </div>
    
    {/**/ }
-    <div style={{
+   <div className='w-0 h-0 sm:w-full sm:h-full'>
+    <div  style={{
       height:'100%',
       width:'100%',
       backgroundImage:`url(${study})`,
       backgroundSize:"cover"
     }} className='bg-[#E9EFFF] h-[100%] w-[100%]'></div>
-   
+   </div>
    </div>
 
 

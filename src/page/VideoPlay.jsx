@@ -40,18 +40,18 @@ function VideoPlay() {
 
   return (
     
-    <div className='flex w-[75rem]'>
+    <div className='flex  w-full'>
     {isloading ? <VideoplaySkeleton/> :
-    <div className='h-screen w-[60%]'>
+    <div className='h-screen  sm:w-[60%]'>
       
       {video && <Video video={video}/>}
      { video &&   <VideoDetail videodetail={video} avatar={video?.owner?.avatar}/>} 
     </div>}
 
-    <div className='h-full  w-[37%] ml-6 sticky border-[0.01rem]  overflow-y-scroll no-scrollbar bg-[] rounded-2xl '>
-         <div className='text-2xl sticky z-50 top-0 h-14 pt-3 bg-[white]'><span className='ml-5'>Videos that You have Liked</span></div>
+    <div className='h-full  w-0 ml-6 sticky border-[0.01rem] sm:w-[37%] overflow-y-scroll no-scrollbar bg-[] rounded-2xl '>
+         <div className='text-xs  sm:text-2xl sticky z-50 top-0 h-14 pt-3 bg-[white]'><span className='ml-5'>Videos that You have Liked</span></div>
           
-          <div onClick={handleClick} className='flex-col  w-full'><Likedvideo noGrid={"1"}/></div>
+          <div onClick={handleClick} className='flex-col   w-full'><Likedvideo noGrid={"1"}/></div>
     </div>
 
 
