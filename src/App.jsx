@@ -18,9 +18,11 @@ import AuthLayout from './Route/AuthLayout';
 import Playlist from './page/Playlist';
 import About from './page/About';
 import Subscription from './page/Subscription';
-import DeviceWarning from './helpers/DeviceWarning';
+import { toast } from 'react-toastify';
+
 function App() {
  const { apiContext, setCurrentuserinfo, isLoggedIn, setIsLoggedIn } = useContext(ApiContext);
+ const [isSmallScreen, setIsSmallScreen] = useState(true);
 
  const getCurrentUser = async () => {
    const user = await apiContext.getCurrentUser();
@@ -28,13 +30,27 @@ function App() {
    setCurrentuserinfo(user.data);
  }
 
+ const warning=()=>{
+
+   if(window.innerWidth <=968){
+     toast.error('Your viewport is small. Consider using a larger device for the best experience',{
+      autoClose:false
+     })
+     setIsSmallScreen(false);
+    }else{
+      setIsSmallScreen(true)
+    }
+  }
+  useEffect(()=>{
+    warning()
+  })
+
  useEffect(() => {
    getCurrentUser();
  }, [isLoggedIn]);
 
  return (
    <Router>
-    <DeviceWarning />
      <Sidebar>
        <Routes>
          <Route path="/" element={<Home />} />

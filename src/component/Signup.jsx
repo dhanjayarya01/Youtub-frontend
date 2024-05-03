@@ -20,6 +20,8 @@ function Signup() {
   const [avatar, setAvatar] = useState(null);
   const [coverImagefile, setCoverImagefile] = useState(null);
 
+  const [coverimageUrl,setCoverimageUrl]=useState('')
+ const [avatarUrl,setAvatarUrl]=useState('')
   
   const avatarfileInputRef = useRef(null);
   const coverfileInputRef = useRef(null);
@@ -33,10 +35,14 @@ function Signup() {
    
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
+    const avatarUrl = URL.createObjectURL(file);
+      setAvatarUrl(avatarUrl)
     setAvatar(file);
   };
   const handleCoverImageChange = (e) => {
     const file = e.target.files[0];
+    const coverUrl = URL.createObjectURL(file);
+    setCoverimageUrl(coverUrl)
     setCoverImagefile(file);
   };
 
@@ -134,15 +140,28 @@ const handlecancel=()=>{
         <div className=' font-bold'>YOUTUB </div>
         </div>
          
-     <div className='imageouter h-[100%] w-[100%]   border-[#FF5C40] border-[0.1rem] rounded-md mb-[3%] flex items-center ' >
+     <div style={{
+                border: '1px solid #000',
+                backgroundImage: coverimageUrl ?`url(${coverimageUrl})`: null ,
+                backgroundSize: "100%",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }} className='imageouter h-[100%] w-[100%]    border-[#FF5C40] border-[0.1rem] rounded-md mb-[3%] flex items-center ' >
         
-        <div className=' avatar h-[70%] w-[20%] ml-[2%] rounded-[50%] bg-green-700 pl-[8%]  '>
-        <div onClick={avatarI} className='h-2'><img className='h-[1.1rem] w-36 bg-blue-700' src='/image/camera.png'></img></div>          
+        <div style={{
+                border: '1px solid #000',
+                backgroundImage: avatarUrl ?`url(${avatarUrl})`: null ,
+                backgroundSize: "100%",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              }} className=' avatar h-[70%] w-[20%] ml-[2%] flex items-center rounded-[50%] border-2 pl-[8%]  '>
+        <div   
+         onClick={avatarI} className=''><img className='h-[1.3rem]  text-3xl w-36 ' src='/image/camera.png'></img></div>          
         <input  className='h-60'ref={avatarfileInputRef} type='file' accept='image/*' onChange={handleAvatarChange} style={{visibility:'hidden'}}/>
 
          </div> 
 
-        <div className=' cover h-[70%] w-[20%] ml-[18%]      pl-[8%] flex items-center ' >
+        <div  className=' cover h-[70%] w-[20%] ml-[18%] pl-[8%] flex items-center ' >
           <div onClick={coverImage} className='h-2'><img className='h-[1.51rem] w-[12rem] mb-4 flex items-center' src='/image/camera.png'></img></div>
           <input  className='h-0   bg-red-500'ref={coverfileInputRef} type='file' accept='image/*' onChange={handleCoverImageChange} style={{visibility:'hidden'}}/>
          
