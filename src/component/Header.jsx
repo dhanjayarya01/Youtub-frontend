@@ -1,10 +1,37 @@
 import React, { useState } from 'react'
 import { TfiSearch } from "react-icons/tfi";
+import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 
  function Header() {
    const [isextended,setIsextended]=useState(false)
+   const [query,setquery]=useState('')
 
+   const [fistclick,setfirstclick]=useState(true)
+ 
+   const navigate=useNavigate()
+
+   const getvideo=async()=>{
+    if(query){
+      navigate(`/${query}`)
+    }
+
+   }
+
+   const sendtoast=()=>{
+    if(fistclick){
+      const isFirstClickShown = localStorage.getItem('isFirstClickShown');
+      if (!isFirstClickShown) {
+          toast.info('Search Videos By Their Title And Description.');
+          localStorage.setItem('isFirstClickShown', 'true');
+          setfirstclick(false);
+      }
+    }
+   }
+
+
+   
   return (
 
      <div className='flex items-center w-full h-[12%] sticky top-0 z-20 bg-[#fff] '>
@@ -14,8 +41,8 @@ import { TfiSearch } from "react-icons/tfi";
         </div>
         
         <div className=' flex items-center ml-[10%] justify-center input w-[50%] h-full '>
-          <input className='w-full pl-8 text-[1.2rem] h-[2.7rem] shadow-md border-[0.08rem]  border-slate-400 rounded-[3rem] rounded-r-none focus:outline-none focus:border-[#C640FF] ' placeholder='hi' ></input>
-          <button className='w-[13%] h-[2.7rem] flex justify-center items-center text-[1.2rem] bg-[#F0F0F0] rounded-r-[2rem]  shadow-md border-[0.08rem]  border-slate-400'><TfiSearch/></button>
+          <input onClick={sendtoast} onChange={(e)=>setquery(e.target.value)} className='w-full pl-8 text-[1.2rem] h-[2.7rem] shadow-md border-[0.08rem]  border-slate-400 rounded-[3rem] rounded-r-none focus:outline-none focus:border-red-400 ' placeholder='Search ' ></input>
+          <button onClick={getvideo} className='w-[13%] h-[2.7rem] flex justify-center items-center text-[1.2rem] bg-[#F0F0F0] rounded-r-[2rem]  shadow-md border-[0.08rem]  border-slate-400'><TfiSearch/></button>
         </div>
     
         

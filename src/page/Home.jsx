@@ -4,7 +4,7 @@ import ApiContext from '../ApiServer/ApiContext';
 import VideosCard from '../component/VideosCard';
 import VideoCardSkeleton from '../skeleton/VideoCardSkeleton'; // Import the skeleton component
 import InfiniteScroll from '../component/InfiniteScroll';
-import {  useNavigate } from 'react-router-dom';
+import {  useNavigate, useParams } from 'react-router-dom';
 import Signup from '../component/Signup';
 import AuthLayout from '../Route/AuthLayout';
 
@@ -18,11 +18,14 @@ function Home() {
     const [totalPages, setTotalPages] = useState(1);
     const [isSignupopen,setSignupopen]=useState(false)
 
+
+
+      const {query} =useParams()
     useEffect(() => {
         loadInitialVideos();
         setSignupopen(isLoggedIn)
 
-    }, []);
+    }, [query]);
         const loadInitialVideos = async () => {
             const initialData = await fetchVideos(currentPage);
             setVideos(initialData.docs);
@@ -33,8 +36,8 @@ function Home() {
    
     const fetchVideos = async (page) => {
         try {
-            
-            const response = await apiContext.getAllVideos({ page });
+             console.log("home qu",query)
+            const response = await apiContext.getAllVideos({ page,query });
             return response.data;
         } catch (error) {
             console.error('Error fetching videos:', error);

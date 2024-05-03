@@ -34,6 +34,7 @@ function App() {
      <Sidebar>
        <Routes>
          <Route path="/" element={<Home />} />
+         <Route path="/:query" element={<Home />} />
          <Route path="/likedvideo" element={<Likedvideo />} />
          <Route path="/history" element={<History />} />
          <Route path="/yourchannel" element={<Yourchannel/>}>
