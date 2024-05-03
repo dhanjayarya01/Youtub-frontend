@@ -15,6 +15,9 @@ import ApiContext from './ApiServer/ApiContext';
 import Userchannel from './page/channel/Userchannel';
 import ChannelVideo from './page/channel/ChannelVideo';
 import AuthLayout from './Route/AuthLayout';
+import Playlist from './page/Playlist';
+import About from './page/About';
+import Subscription from './page/Subscription';
 
 function App() {
  const { apiContext, setCurrentuserinfo, isLoggedIn, setIsLoggedIn } = useContext(ApiContext);
@@ -39,6 +42,9 @@ function App() {
          <Route path="/history" element={<History />} />
          <Route path="/yourchannel" element={<Yourchannel/>}>
           <Route path="channelvideo" element={<ChannelVideo/>}/>
+          <Route path="playlist" element={<Playlist/>}/>
+          <Route path="about" element={<About/>}/>
+          <Route path="subscription/:channelId" element={<Subscription/>}/>
           </Route>
          <Route path="/myprofile" element={<Myprofile />} />
          <Route path="/logout" element={<Logout />} />

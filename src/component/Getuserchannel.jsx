@@ -15,6 +15,7 @@ function Getuserchannel({ channelname }) {
   const [subscribercount, setSubscribercount] = useState();
   const [sameUser,setSameUser]=useState(false)
   const [uploadVideoOpen,setUploadVideoOpen]=useState(false)
+  const [channelId,setChannelId]=useState()
   
   const getUserChannelProfile = async () => {
     const channel = await apiContext.getUserChannelProfile(channelname);
@@ -23,8 +24,10 @@ function Getuserchannel({ channelname }) {
     setChanneldata(channel?.data);
     setIsloading(false);
     setChannelvideo(channel?.data?.channelvideos);
-    
-    
+
+    // console.log(channel)
+    setChannelId(channel?.data?._id)
+   
   };
 
     useEffect(()=>{
@@ -107,9 +110,9 @@ function Getuserchannel({ channelname }) {
         <div>
           <div className='flex  items-center text-xl border-b-2 h-[3rem]'>
             <button onClick={()=>navigate('/yourchannel/channelvideo',{state:channelvideo})} className={`mr-[8%] ${location.pathname === '/yourchannel/channelvideo' && 'border-b-2 border-red-900'}`}>Videos</button>
-            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/playlist' && 'border-b-2 border-black'}`} to="/playlist">Playlist</Link>
-            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/about' && 'border-b-2 border-black'}`} to="/about">About</Link>
-            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/contact' && 'border-b-2 border-black'}`} to="/contact">Contact</Link>
+            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/subscription' && 'border-b-2 border-black'}`} to={`Subscription/${channelId}`}>Subscription</Link>
+            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/playlist' && 'border-b-2 border-black'}`} to="playlist">Playlist</Link>
+            <Link className={`mr-[8%] ${location.pathname === '/yourchannel/about' && 'border-b-2 border-black'}`} to="about">About</Link>
           </div>
         </div>
       </div>

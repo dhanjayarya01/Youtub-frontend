@@ -36,7 +36,6 @@ function Home() {
    
     const fetchVideos = async (page) => {
         try {
-             console.log("home qu",query)
             const response = await apiContext.getAllVideos({ page,query });
             return response.data;
         } catch (error) {
@@ -62,7 +61,7 @@ function Home() {
                 {loading ?
                     Array.from({ length: 6 }).map((_, index) => <VideoCardSkeleton key={index} />)
                     :
-                    videos.map((video) => (
+                    videos?.map((video) => (
                         <VideosCard
                             key={video._id}
                             avatar={video.ownerDetails?.avatar}
