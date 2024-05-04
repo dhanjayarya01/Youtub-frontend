@@ -35,7 +35,7 @@ import { toast } from 'react-toastify';
   return (
 
      <div className='flex items-center w-full h-[12%] sticky top-0 z-20 bg-[#fff] '>
-       <div  className='logo ml-[1.3%] flex items-center '>
+       <div  className='logo flex items-center '>
             <div  className=' flex  h-[2rem] w-[100%]  '><img className='h-[100%] w-[100%] '  src='/image/yt1.png'></img></div>
             <div className=' font-bold ml-1 text-[112%]'>YouTube</div>
         </div>

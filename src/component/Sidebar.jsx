@@ -115,7 +115,7 @@ const Sidebar=({children})=>{
             
             {isSmallScreen && (
             <>
-            <div className=" flex  h-screen bg-red-900   w-[8%] "></div>
+            <div className=" flex  h-screen    sm:w-[6rem] "></div>
             <motion.div className=" z-50 overflow-clip  absolute h-screen  w-[3rem] bg-[#ffffff]" animate={{width:isopen ?"220px":"72.8px" , transition:{ duration:0.5,type:"spring", damping:11}}}>
  
               <div className={`title ${isopen && 'flex  items-center'}`}>

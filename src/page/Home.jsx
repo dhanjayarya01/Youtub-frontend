@@ -56,7 +56,7 @@ function Home() {
     return (
         <>
         {!isHomepage && ( !isLoggedIn ? <Signup/> :null)}
-        <div className="text-white   sm:m-0 max-h-screen w-[100%] grid xl:grid-cols-3 sm:grid-cols-3 grid-cols-1">
+        <div className="text-white   mb-20 sm:m-0 max-h-screen w-[74rem]    grid xl:grid-cols-3 sm:grid-cols-3 grid-cols-1">
             <InfiniteScroll fetchMore={loadMoreVideos} hasNextPage={currentPage < totalPages && !loading}>
                 {loading ?
                     Array.from({ length: 6 }).map((_, index) => <VideoCardSkeleton key={index} />)

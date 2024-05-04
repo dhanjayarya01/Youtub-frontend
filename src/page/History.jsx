@@ -27,7 +27,7 @@ function History() {
 
 
   return (
-    <div className="text-white mb-20 sm:m-0 max-h-screen w-[100%] grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1">
+    <div className="text-white mb-20 sm:m-0 max-h-screen w-[74rem] grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1">
       {loading ? (
         <VideoCardSkeleton />
       ) : (

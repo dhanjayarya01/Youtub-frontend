@@ -129,7 +129,7 @@ export default function Myprofile() {
 
     return (
       isloading ? ( <ChannelSkeleton/>): (
-      <div className='w-[100%] p-14 pl-0  pb-0 pt-0 bg h-{100%}'>
+      <div className='w-[100%] p-14 pb-0 pt-0 bg h-{100%}'>
           
             <button  onClick={toggleUpload} className={`bg-[#ECECEC] text-xl  active:translate-x-2 duration-[0.8s]  active:bg-slate-400   rounded-3xl mt-2 h-[10%] absolute right-[5%] flex justify-center items-center ${isUploadOpen?' w-[16%]' :' w-[14%]'}`}>
               {isUploadOpen ?  
