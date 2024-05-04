@@ -4,7 +4,7 @@ import { toast } from 'react-toastify';
 class ApiService {
   constructor() {
     this.axiosInstance = axios.create({
-      baseURL: 'https://backendproject-sd57.onrender.com/api/v1'
+      baseURL: '/api/v1'
     });
   }
 

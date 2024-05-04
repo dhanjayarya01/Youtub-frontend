@@ -22,7 +22,7 @@ function Likedvideo({noGrid}) {
 
   return (
 
-    <div className={`text-white   ${noGrid ? '':'mb-20 sm:m-0 max-h-screen w-[100%] sm:w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1'} `}>
+    <div className={`text-white   ${noGrid ? '':' sm:m-0 max-h-screen w-[100%] sm:w-full grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1'} `}>
                   {
                     loading?<VideoCardSkeleton/>:
                     videos?.map((video) => (

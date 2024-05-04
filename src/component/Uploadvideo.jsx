@@ -3,7 +3,7 @@ import { MdCancel } from "react-icons/md";
 import { useContext } from 'react';
 import ApiContext from '../ApiServer/ApiContext';
 import { toast } from 'react-toastify';
-
+import camera from "/image/camera.png"
 function Uploadvideo({setUploadVideoOpen}) {
   
   const [thumbnailuploaded,setThumbnailuploaded]=useState(false)
@@ -120,7 +120,7 @@ const handleThumbnail = (e) => {
               backgroundRepeat: "no-repeat",
             }} className='w-[30%] h-full flex items-center  justify-center border-2 '>
         
-        <button onClick={ThumbnailRef} className='w-[20%] h-[20%]  '> <img  src="image/camera.png" alt="click" /></button>
+        <button onClick={ThumbnailRef} className='w-[20%] h-[20%]  '><img  src={camera} alt="click" /></button>
         <input className='h-0 w-0' ref={ThumbnailfileRef} type='file' accept='image/*' onChange={handleThumbnail} style={{visibility:'hidden'}}/>
  
         </div>
