@@ -60,7 +60,7 @@ function Getuserchannel({ channelname }) {
     isloading ? <ChannelSkeleton /> : (
 
       
-      <div className='w-[100%] p-14 pl-0 pb-0 pt-0 bg h-{100%}'>
+      <div className='w-[100%] p-14 pb-0 pt-0 bg h-{100%}'>
         { uploadVideoOpen&& <div className='absolute z-50 left-[14%] right-[14%] top-2 bottom-2 bg-white rounded-2xl border-2'>
           <Uploadvideo setUploadVideoOpen={setUploadVideoOpen}/>
           
